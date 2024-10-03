@@ -19,14 +19,103 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"/>
+            app:layout_constraintHorizontal_bias="0.503" app:layout_constraintVertical_bias="0.533"/>
+    <ImageView
+            android:layout_width="220dp"
+            android:layout_height="241dp" app:srcCompat="@drawable/logo_redondo" android:id="@+id/imglogo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.0" tools:ignore="ContentDescription"/>
     <TextView
-            android:text="Registrar"
-            android:layout_width="60dp"
-            android:layout_height="16dp" android:id="@+id/txtregister"
+            android:text="REGISTRAR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/txtregistrer"
+            android:textSize="34sp"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintVertical_bias="0.106" tools:ignore="HardcodedText" android:textStyle="bold"/>
+    <TextView
+            android:text="Correo Electronico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/txtcorreo"
+            android:textSize="30sp"
             app:layout_constraintTop_toTopOf="@+id/registercontainer"
             app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
             app:layout_constraintEnd_toEndOf="@+id/registercontainer"
-            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintVertical_bias="0.114"/>
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" tools:ignore="HardcodedText"
+            app:layout_constraintHorizontal_bias="0.619" app:layout_constraintVertical_bias="0.324"/>
+    <TextView
+            android:text="Username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/txtusername"
+            android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" tools:ignore="HardcodedText"
+            app:layout_constraintVertical_bias="0.505" app:layout_constraintHorizontal_bias="0.549"/>
+    <TextView
+            android:text="Contraseña"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/txtpassword"
+            android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" tools:ignore="HardcodedText"
+            app:layout_constraintHorizontal_bias="0.551" app:layout_constraintVertical_bias="0.7"/>
+    <Button
+            android:text="Registrar"
+            android:backgroundTint="#F85959"
+            android:layout_width="135dp"
+            android:layout_height="56dp" android:id="@+id/btregister"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintVertical_bias="0.972" tools:ignore="HardcodedText,TextContrastCheck"/>
+    <EditText
+            android:layout_width="265dp"
+            android:layout_height="71dp"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/inputemail"
+            android:hint="Correo institucional de la UTT"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintVertical_bias="0.407" tools:ignore="Autofill,HardcodedText"/>
+    <EditText
+            android:layout_width="265dp"
+            android:layout_height="71dp"
+            android:inputType="text"
+            android:ems="10"
+            android:id="@+id/inputusername"
+            android:hint="username"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintVertical_bias="0.613"
+            tools:ignore="Autofill,DuplicateClickableBoundsCheck,HardcodedText,VisualLintOverlap"/>
+    <EditText
+            android:layout_width="265dp"
+            android:layout_height="71dp"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/inputpassword"
+            android:hint="*******"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintVertical_bias="0.819" tools:ignore="Autofill,HardcodedText"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
