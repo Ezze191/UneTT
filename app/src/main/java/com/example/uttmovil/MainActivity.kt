@@ -26,6 +26,10 @@ class MainActivity : AppCompatActivity() {
         //boton ingreasar a la app
         val ingresar = findViewById<Button>(R.id.bt_ingresar)
 
+        ingresar.setOnClickListener {
+
+        }
+
 
 
         //boton de registrarte en la app
