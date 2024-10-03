@@ -23,8 +23,15 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //boton ingreasar a la app
+        val ingresar = findViewById<Button>(R.id.bt_ingresar)
+
+
+
+        //boton de registrarte en la app
         val btreg = findViewById<Button>(R.id.bt_registrar)
 
+        //evento de click en el boton de registrarte
         btreg.setOnClickListener {
             val intent = Intent(this, displayregistrer::class.java)
             startActivity(intent)
