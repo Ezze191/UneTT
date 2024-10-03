@@ -9,4 +9,24 @@
         android:layout_height="match_parent"
         tools:context=".displayregistrer">
 
+    <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="319dp"
+            android:layout_height="635dp"
+            android:background="@color/black_opacity"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"/>
+    <TextView
+            android:text="Registrar"
+            android:layout_width="60dp"
+            android:layout_height="16dp" android:id="@+id/txtregister"
+            app:layout_constraintTop_toTopOf="@+id/registercontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintVertical_bias="0.114"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
