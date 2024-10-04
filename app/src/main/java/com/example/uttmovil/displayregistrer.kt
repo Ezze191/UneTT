@@ -39,17 +39,35 @@ class displayregistrer : AppCompatActivity() {
 
         //evento click al bregistrar
         bregistrar.setOnClickListener{
+            //convierte las varibales del input a tedto
             val email = inputemail.text.toString()
             val password = inputpassword.text.toString()
             val username = inputusername.text.toString()
-            registrar(email, password, username)
+
+            //aqui detecta si el correo es de la escuela
+            val keywords = listOf("@uttcampus.edu.mx")
+            val escorrecto = keywords.all{email.contains(it)}
+
+            if(escorrecto){
+                //si el correo es correcto va a registrar el usuario en firebase
+                registrar(email, password, username)
+
+            }else{
+                //si el correo es incorrecto va saltar un error
+                AlertDialog.Builder(this).apply {
+                    setTitle("Error")
+                    setMessage("EL CORREO DEBE SER INSTITUCIONAL")
+                    setPositiveButton("OK", null)
+                }.show()
+            }
         }
-
-
     }
+    //funcion que registra al usuario con los datos que ingreso a firebase
     private fun registrar(correo:String, password:String, username:String) {
+        //aqui crea el nuevo usuario con las credenciales proporcionadas
         auth.createUserWithEmailAndPassword(correo, password)
             .addOnCompleteListener { authResult ->
+                //si la accion se ejecuta correctamente lo va a subir a firebase y actualizar el nombre
                 val user = auth.currentUser
                 val profileUpdates = UserProfileChangeRequest.Builder()
                     .setDisplayName(username)
@@ -61,6 +79,7 @@ class displayregistrer : AppCompatActivity() {
                             // Enviar el correo de verificación
                             user.sendEmailVerification()
                                 .addOnCompleteListener { emailTask ->
+                                    //si el correo se envio correctamente va hacer esto
                                     if (emailTask.isSuccessful) {
                                         AlertDialog.Builder(this).apply {
                                             setTitle("CORRE DE VERIFICACION")
@@ -69,11 +88,10 @@ class displayregistrer : AppCompatActivity() {
 
                                         }.show()
 
-
                                     } else {
-
+                                        //si el correo no se envio correctamente eso va hacer esto
                                     }
-
+                                    //aqui dice que el usuario se registro correctamente
                                     AlertDialog.Builder(this).apply {
                                         setTitle("Registro")
                                         setMessage("Registro Exitoso")
@@ -81,6 +99,7 @@ class displayregistrer : AppCompatActivity() {
                                     }.show()
                                 }
                                 .addOnFailureListener { exception ->
+                                    //aqui sale el mensaje si el usuario no se agrego correctamente
                                     AlertDialog.Builder(this).apply {
                                         setTitle("Error")
                                         setMessage("AH OCURRIDO UN ERROR CON EL USUSARIO")
