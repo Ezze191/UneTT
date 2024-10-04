@@ -66,7 +66,7 @@ class displayregistrer : AppCompatActivity() {
                                             setTitle("CORRE DE VERIFICACION")
                                             setMessage("VERIFICA TU CORREO PARA REGISTRARTE")
                                             setPositiveButton("OK", null)
-                                            finish()
+
                                         }.show()
 
 
