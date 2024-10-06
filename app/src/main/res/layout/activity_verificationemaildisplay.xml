@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        tools:context=".verificationemaildisplay">
+    <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="372dp"
+            android:layout_height="845dp"
+            android:background="@color/black_opacity"
+            android:theme="?attr/actionBarTheme"
+            android:minHeight="?attr/actionBarSize"
+            android:id="@+id/verificationcontainer" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintHorizontal_bias="0.487"
+            tools:ignore="VisualLintBounds"/>
+
+    <Button
+            android:text="Okay"
+            android:layout_width="135dp"
+            android:layout_height="60dp" android:id="@+id/btok"
+            tools:ignore="HardcodedText,MissingConstraints,TextContrastCheck,VisualLintOverlap"
+            android:backgroundTint="#F85959" app:layout_constraintTop_toTopOf="@+id/verificationcontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/verificationcontainer"
+            app:layout_constraintEnd_toEndOf="@+id/verificationcontainer"
+            app:layout_constraintStart_toStartOf="@+id/verificationcontainer"
+            app:layout_constraintHorizontal_bias="0.459" app:layout_constraintVertical_bias="0.808"/>
+    <ImageView
+            android:layout_width="365dp"
+            android:layout_height="782dp" app:srcCompat="@drawable/verificarcorreo" android:id="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="@+id/verificationcontainer"
+            app:layout_constraintBottom_toBottomOf="@+id/verificationcontainer"
+            app:layout_constraintEnd_toEndOf="@+id/verificationcontainer"
+            app:layout_constraintStart_toStartOf="@+id/verificationcontainer"
+            app:layout_constraintVertical_bias="0.129"
+            tools:ignore="ContentDescription,VisualLintBounds"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

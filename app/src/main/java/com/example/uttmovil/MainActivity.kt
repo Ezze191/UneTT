@@ -46,24 +46,35 @@ class MainActivity : AppCompatActivity() {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
                     //si todo esta bien aqui va hacer algo
-                    val intent = Intent(this, displayfeed::class.java)
-                    startActivity(intent)
-                    finish()
+                    //crea una instancia para si el usuario verifico su correo pueda iniciar session
+                    val user = FirebaseAuth.getInstance().currentUser
+
+                    if(user?.isEmailVerified == true) {
+                        //si el correo esta verificado lo dirije a la pantalla del feed
+                        val intent = Intent(this, displayfeed::class.java)
+                        startActivity(intent)
+                        finish()
+
+                    }else{
+                        // si el correo no esta verficado lanza un error
+                       FirebaseAuth.getInstance().signOut()
+                        AlertDialog.Builder(this).apply {
+                            setTitle("ERROR AL INICIAR SESSION  ")
+                            setMessage("Debes de verificar tu correo para continuar")
+                            setPositiveButton("OK", null)
+                        }.show()
+                    }
                 }
                 .addOnFailureListener {
                     //si todo esta mal aqui va hacer algo
                     utiles.showerror(this, it.message.toString())
                 }
         }
-
-
         //evento de click en el boton de registrarte
         btreg.setOnClickListener {
             val intent = Intent(this, displayregistrer::class.java)
             startActivity(intent)
         }
-
-
 
     }
 }

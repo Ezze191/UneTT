@@ -1,6 +1,7 @@
 package com.example.uttmovil
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -81,22 +82,20 @@ class displayregistrer : AppCompatActivity() {
                                 .addOnCompleteListener { emailTask ->
                                     //si el correo se envio correctamente va hacer esto
                                     if (emailTask.isSuccessful) {
-                                        AlertDialog.Builder(this).apply {
-                                            setTitle("CORRE DE VERIFICACION")
-                                            setMessage("VERIFICA TU CORREO PARA REGISTRARTE")
-                                            setPositiveButton("OK", null)
-
-                                        }.show()
+                                            //si es correcto se va a enviar a una pantalla de verificacion de correo
+                                            val intent = Intent(this, verificationemaildisplay::class.java)
+                                            startActivity(intent)
+                                            finish()
 
                                     } else {
                                         //si el correo no se envio correctamente eso va hacer esto
+                                        AlertDialog.Builder(this).apply {
+                                            setTitle("Error")
+                                            setMessage("ALGO SALIO MAL")
+                                            setPositiveButton("OK", null)
+                                        }
                                     }
-                                    //aqui dice que el usuario se registro correctamente
-                                    AlertDialog.Builder(this).apply {
-                                        setTitle("Registro")
-                                        setMessage("Registro Exitoso")
-                                        setPositiveButton("OK", null)
-                                    }.show()
+
                                 }
                                 .addOnFailureListener { exception ->
                                     //aqui sale el mensaje si el usuario no se agrego correctamente
@@ -111,4 +110,7 @@ class displayregistrer : AppCompatActivity() {
                     }
             }
     }
+
+
+
 }
