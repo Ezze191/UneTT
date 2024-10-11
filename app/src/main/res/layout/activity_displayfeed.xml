@@ -1,26 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".displayfeed">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/texto_Unett"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#23C895"
+    tools:context=".displayfeed">
 
     <View
-            android:id="@+id/divider"
-            android:layout_width="409dp"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.106"/>
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/materialToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
+        android:layout_width="411dp"
+        android:layout_height="73dp"
+        android:background="#010201"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/boton_usuario"
+        android:layout_width="70dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="4dp"
+        android:background="#9B1E1E"
+        android:backgroundTint="#00FBFAFA"
+        android:scaleType="fitCenter"
+        android:tint="@color/black_opacity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/USER"
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:layout_editor_absoluteX="339dp" />
+
+    <ImageButton
+        android:id="@+id/boton_inicio"
+        android:layout_width="74dp"
+        android:layout_height="72dp"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/logo_redondo"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <ImageButton
+        android:id="@+id/boton_calendario"
+        android:layout_width="79dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/blue"
+        android:backgroundTint="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:textAlignment="center"
+        android:tint="@color/black_opacity"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:srcCompat="@drawable/CALENDAR"
+        tools:layout_editor_absoluteX="260dp" />
+
     <TextView
-            android:text="Puto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txtview"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        android:id="@+id/textView"
+        android:layout_width="95dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginBottom="11dp"
+        android:background="#00000000"
+        android:text="UneTT"
+        android:textColor="#FFFDFD"
+        android:textSize="27sp"
+        app:layout_constraintBottom_toBottomOf="@+id/boton_inicio"
+        app:layout_constraintEnd_toStartOf="@+id/boton_busqueda"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
+        app:layout_constraintTop_toTopOf="@+id/boton_inicio"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/boton_busqueda"
+        android:layout_width="73dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="170dp"
+        android:backgroundTint="#00FFFFFF"
+        android:tint="@color/black_opacity"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintStart_toEndOf="@+id/materialToolbar"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar"
+        app:layout_constraintVertical_bias="0.166"
+        app:srcCompat="@drawable/search" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="421dp"
+        android:layout_height="77dp"
+        android:background="#020202"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/texto_unett"
+        android:layout_width="225dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="16dp"
+        android:elegantTextHeight="true"
+        android:freezesText="false"
+        android:text="UneTT"
+        android:textAlignment="center"
+        android:textColor="#FDFBFB"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:autoSizeTextType="none"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton6"
+        android:layout_width="98dp"
+        android:layout_height="77dp"
+        android:background="#00FFFFFF"
+        android:tint="@color/black_opacity"
+        app:srcCompat="@drawable/plus"
+        tools:layout_editor_absoluteX="311dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ScrollView
+        android:layout_width="410dp"
+        android:layout_height="610dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="78dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
