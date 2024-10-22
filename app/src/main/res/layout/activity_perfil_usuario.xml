@@ -1,0 +1,193 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/texto_Unett"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#23C895"
+    tools:context=".displayfeed"
+    tools:ignore="ExtraText">
+
+
+    <!-- AppBar con el logo -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        tools:ignore="MissingConstraints">
+
+        <!-- Toolbar que contiene el logo -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#010201"
+            android:minHeight="?attr/actionBarSize"
+            app:logoScaleType="centerCrop"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
+
+            <!-- Logo de la página -->
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="240dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:contentDescription="Logo de la página"
+                android:scaleType="centerCrop"
+                android:src="@drawable/unettl" /> <!-- Centra el logo en la barra -->
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ScrollView para el contenido desplazable entre las dos barras -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginTop="81dp"
+        android:layout_marginBottom="96dp"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBar"
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            tools:context=".MainActivity">
+
+            <TextView
+                android:id="@+id/child_scroll"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:background="@color/blue"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/child_scroll"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:background="@color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/child_scroll"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:background="@color/black"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
+        android:layout_width="0dp"
+        android:layout_height="95dp"
+        android:layout_marginBottom="4dp"
+        android:background="#010201"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Primer botón (boton_inicio) -->
+        <ImageButton
+            android:id="@+id/boton_inicio"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:backgroundTint="#00FFFFFF"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/home"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck"/>
+
+
+        <!-- Segundo botón (boton_busqueda) -->
+        <ImageButton
+            android:id="@+id/boton_busqueda"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:backgroundTint="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_inicio"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/search"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <!-- Tercer botón (boton_agregar) -->
+        <ImageButton
+            android:id="@+id/boton_agregar"
+            android:layout_width="77dp"
+            android:layout_height="80dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_busqueda"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/plus"
+            app:tint="@color/black_opacity"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <!-- Cuarto botón (boton_user) -->
+        <ImageButton
+            android:id="@+id/boton_user"
+            android:layout_width="77dp"
+            android:layout_height="80dp"
+            android:backgroundTint="#020202"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_agregar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/userr"
+            app:tint="#FBF8F8"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+        <!-- Quinto botón (seguidores_button) -->
+        <ImageButton
+            android:id="@+id/seguidores_button"
+            android:layout_width="76dp"
+            android:layout_height="77dp"
+            android:backgroundTint="#020202"
+            android:keepScreenOn="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_user"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/seguidores"
+            app:tint="#FBF8F8"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+

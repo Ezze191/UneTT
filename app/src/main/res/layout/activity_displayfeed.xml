@@ -1,156 +1,271 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/texto_Unett"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#23C895"
-    tools:context=".displayfeed">
+    tools:context=".displayfeed"
+    tools:ignore="ExtraText">
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="409dp"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/materialToolbar"
-        app:layout_constraintStart_toStartOf="parent"
+    <!-- AppBar con el logo -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        app:layout_constraintVertical_bias="1.0" />
+        <!-- Toolbar que contiene el logo -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/barra_arriba"
+            android:layout_width="match_parent"
+            android:layout_height="77dp"
+            android:background="#010201"
+            android:minHeight="?attr/actionBarSize"
+            app:logoScaleType="centerCrop"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light">
 
+            <!-- Logo de la página -->
+            <ImageView
+                android:id="@+id/logoImageView"
+                android:layout_width="240dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:contentDescription="Logo de la página"
+                android:scaleType="centerCrop"
+                android:src="@drawable/unettl" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ScrollView para el contenido desplazable entre las dos barras -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="413dp"
+        android:layout_height="678dp"
+        app:layout_constraintBottom_toBottomOf="@+id/barra_abajo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/appBar"
+        tools:ignore="MissingConstraints,NotSibling">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="409dp"
+            android:layout_height="548dp"
+            android:padding="0dp"
+            tools:context=".MainActivity">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/espacio_publicaciones"
+                android:layout_width="407dp"
+                android:layout_height="264dp"
+                android:layout_marginTop="136dp"
+                android:background="#A2E9E0E0"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/barra_arriba">
+
+                <!-- Este es el texto que estaba en el TextView -->
+
+                <!-- Agrega una imagen -->
+                <TextView
+                    android:id="@+id/texto_publicacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Texto de la publicación"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <!-- Agrega un botón -->
+                <ImageView
+                    android:id="@+id/imagen_publicacion"
+                    android:layout_width="384dp"
+                    android:layout_height="142dp"
+                    android:layout_margin="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="44dp"
+                    android:contentDescription="Descripción de la imagen"
+                    android:src="@drawable/fondo_publicaciones"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/texto_publicacion" />
+
+                <Button
+                    android:id="@+id/boton_publicacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Botón"
+                    app:layout_constraintTop_toBottomOf="@id/imagen_publicacion"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_margin="16dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/headline"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/black"
+                android:text="comentarios"
+                android:textColor="#EFE7E7"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/espacio_publicaciones" />
+
+            <TextView
+                android:id="@+id/indicator_1"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="#BF7676"
+                app:layout_constraintEnd_toStartOf="@+id/indicator_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/headline" />
+
+            <TextView
+                android:id="@+id/indicator_2"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="#58B15A"
+                app:layout_constraintEnd_toStartOf="@+id/indicator_3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator_1"
+                app:layout_constraintTop_toBottomOf="@+id/headline" />
+
+            <ImageButton
+                android:id="@+id/indicator_3"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="#733434"
+                app:layout_constraintEnd_toStartOf="@+id/indicator_4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator_2"
+                app:layout_constraintTop_toBottomOf="@+id/headline"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/indicator_4"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="16dp"
+                android:background="#9E4242"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/indicator_3"
+                app:layout_constraintTop_toBottomOf="@+id/headline" />
+
+            <TextView
+                android:id="@+id/body_text"
+                android:layout_width="0dp"
+                android:layout_height="512dp"
+                android:layout_marginTop="16dp"
+                android:background="#A2E9E0E0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/indicator_1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!-- MaterialToolbar inferior con botones -->
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
-        android:layout_width="411dp"
-        android:layout_height="73dp"
+        android:id="@+id/barra_abajo"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
         android:background="#010201"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <ImageButton
-        android:id="@+id/boton_usuario"
-        android:layout_width="70dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="4dp"
-        android:background="#9B1E1E"
-        android:backgroundTint="#00FBFAFA"
-        android:scaleType="fitCenter"
-        android:tint="@color/black_opacity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/USER"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="339dp" />
+        <!-- Primer botón (boton_inicio) -->
+        <ImageButton
+            android:id="@+id/boton_inicio"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:backgroundTint="#00FFFFFF"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/home"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-    <ImageButton
-        android:id="@+id/boton_inicio"
-        android:layout_width="74dp"
-        android:layout_height="72dp"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/logo_redondo"
-        tools:layout_editor_absoluteX="1dp" />
+        <!-- Segundo botón (boton_busqueda) -->
+        <ImageButton
+            android:id="@+id/boton_busqueda"
+            android:layout_width="77dp"
+            android:layout_height="77dp"
+            android:backgroundTint="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_inicio"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/search"
+            app:tint="@color/white"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-    <ImageButton
-        android:id="@+id/boton_calendario"
-        android:layout_width="79dp"
-        android:layout_height="67dp"
-        android:layout_marginBottom="4dp"
-        android:background="@color/blue"
-        android:backgroundTint="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:textAlignment="center"
-        android:tint="@color/black_opacity"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/CALENDAR"
-        tools:layout_editor_absoluteX="260dp" />
+        <!-- Tercer botón (boton_agregar) -->
+        <ImageButton
+            android:id="@+id/boton_agregar"
+            android:layout_width="77dp"
+            android:layout_height="80dp"
+            android:background="#00FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_busqueda"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/plus"
+            app:tint="@color/black_opacity"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="95dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="11dp"
-        android:background="#00000000"
-        android:text="UneTT"
-        android:textColor="#FFFDFD"
-        android:textSize="27sp"
-        app:layout_constraintBottom_toBottomOf="@+id/boton_inicio"
-        app:layout_constraintEnd_toStartOf="@+id/boton_busqueda"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
-        app:layout_constraintTop_toTopOf="@+id/boton_inicio"
-        app:layout_constraintVertical_bias="1.0" />
+        <!-- Cuarto botón (boton_user) -->
+        <ImageButton
+            android:id="@+id/boton_user"
+            android:layout_width="77dp"
+            android:layout_height="80dp"
+            android:backgroundTint="#020202"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_agregar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/userr"
+            app:tint="#FBF8F8"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-    <ImageButton
-        android:id="@+id/boton_busqueda"
-        android:layout_width="73dp"
-        android:layout_height="79dp"
-        android:layout_marginStart="170dp"
-        android:backgroundTint="#00FFFFFF"
-        android:tint="@color/black_opacity"
-        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
-        app:layout_constraintStart_toEndOf="@+id/materialToolbar"
-        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
-        app:layout_constraintTop_toTopOf="@+id/materialToolbar"
-        app:layout_constraintVertical_bias="0.166"
-        app:srcCompat="@drawable/search" />
+        <!-- Quinto botón (seguidores_button) -->
+        <ImageButton
+            android:id="@+id/seguidores_button"
+            android:layout_width="76dp"
+            android:layout_height="77dp"
+            android:backgroundTint="#020202"
+            android:keepScreenOn="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/boton_user"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/seguidores"
+            app:tint="#FBF8F8"
+            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="421dp"
-        android:layout_height="77dp"
-        android:background="#020202"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/texto_unett"
-        android:layout_width="225dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="16dp"
-        android:elegantTextHeight="true"
-        android:freezesText="false"
-        android:text="UneTT"
-        android:textAlignment="center"
-        android:textColor="#FDFBFB"
-        android:textSize="48sp"
-        android:textStyle="bold"
-        app:autoSizeTextType="none"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton6"
-        android:layout_width="98dp"
-        android:layout_height="77dp"
-        android:background="#00FFFFFF"
-        android:tint="@color/black_opacity"
-        app:srcCompat="@drawable/plus"
-        tools:layout_editor_absoluteX="311dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <ScrollView
-        android:layout_width="410dp"
-        android:layout_height="610dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="78dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
+    </com.google.android.material.appbar.MaterialToolbar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
