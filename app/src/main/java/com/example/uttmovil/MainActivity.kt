@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val intent = Intent(this, displayfeed::class.java)
-        startActivity(intent)
+
 
 
 

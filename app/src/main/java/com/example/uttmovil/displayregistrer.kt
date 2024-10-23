@@ -1,4 +1,7 @@
 package com.example.uttmovil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -51,7 +54,7 @@ class displayregistrer : AppCompatActivity() {
                 //si el correo es correcto va a registrar el usuario en firebase
                 registrar(email, password, username)
 
-            }else{
+                }else{
                 //si el correo es incorrecto va saltar un error
                 AlertDialog.Builder(this).apply {
                     setTitle("Error")
@@ -83,7 +86,48 @@ class displayregistrer : AppCompatActivity() {
                                             //si es correcto se va a enviar a una pantalla de verificacion de correo
                                             val intent = Intent(this, verificationemaildisplay::class.java)
                                             startActivity(intent)
+
+                                        //y si es correcto lo va a registrar a la base de datos de muysql
+                                        RetrofitClient.apiService.insertUser(correo, username, password)
+                                            .enqueue(object : Callback<Void> {
+                                                override fun onResponse(
+                                                    call: Call<Void>,
+                                                    response: Response<Void>
+                                                ) {
+                                                    if (response.isSuccessful) {
+                                                        // hacer algo si se registro correctamente
+                                                        AlertDialog.Builder(this@displayregistrer).apply {
+                                                            setTitle("Registro exitoso")
+                                                            setMessage("El usuario se registró correctamente en mysql")
+                                                            setPositiveButton("OK", null)
+
+                                                        }
+
+                                                    } else {
+                                                        // Error al insertar en la base de datos
+                                                        AlertDialog.Builder(this@displayregistrer).apply {
+                                                            setTitle("Error")
+                                                            setMessage("Error al registrar el usuario en MySQL")
+                                                            setPositiveButton("OK", null)
+                                                        }.show()
+                                                    }
+                                                }
+
+                                                override fun onFailure(call: Call<Void>, t: Throwable) {
+                                                    // Error de conexión
+                                                    AlertDialog.Builder(this@displayregistrer).apply {
+                                                        setTitle("Error")
+                                                        setMessage("Error de conexión: ${t.message}")
+                                                        setPositiveButton("OK", null)
+                                                    }.show()
+                                                }
+                                            })
+
+
                                             finish()
+
+
+
 
                                     } else {
                                         //si el correo no se envio correctamente eso va hacer esto
@@ -99,7 +143,7 @@ class displayregistrer : AppCompatActivity() {
                                     //aqui sale el mensaje si el usuario no se agrego correctamente
                                     AlertDialog.Builder(this).apply {
                                         setTitle("Error")
-                                        setMessage("AH OCURRIDO UN ERROR CON EL USUSARIO")
+                                        setMessage("AH OCURRIDO UN ERROR CON EL USUSARIO" + exception.message)
                                         setPositiveButton("OK", null)
                                     }.show()
                                 }
