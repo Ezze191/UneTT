@@ -2,6 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name = 'black_opacity'>#BFF5F5F5</color>
+    <color name = 'black_opacity'>#69F5F5F5</color>
     <color name = 'blue' >#2499FF</color>
 </resources>

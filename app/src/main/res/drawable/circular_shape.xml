@@ -1,0 +1,12 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval"> <!-- Forma ovalada, que será un círculo si ancho y alto son iguales -->
+
+    <!-- Fondo del círculo, puedes cambiarlo a otro color si prefieres -->
+    <solid android:color="@android:color/transparent" />
+
+    <!-- Borde opcional para el círculo -->
+    <stroke
+        android:width="2dp"
+        android:color="@android:color/black" /> <!-- Cambia el color si lo prefieres -->
+
+</shape>

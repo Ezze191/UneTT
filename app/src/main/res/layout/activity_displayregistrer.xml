@@ -72,7 +72,7 @@
     <Button
             android:text="Registrar"
             android:backgroundTint="#F85959"
-            android:layout_width="135dp"
+            android:layout_width="135sp"
             android:layout_height="56dp" android:id="@+id/btregister"
             app:layout_constraintTop_toTopOf="@+id/registercontainer"
             app:layout_constraintBottom_toBottomOf="@+id/registercontainer"

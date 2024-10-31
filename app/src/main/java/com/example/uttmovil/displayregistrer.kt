@@ -2,7 +2,6 @@ package com.example.uttmovil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -143,7 +142,7 @@ class displayregistrer : AppCompatActivity() {
                                     //aqui sale el mensaje si el usuario no se agrego correctamente
                                     AlertDialog.Builder(this).apply {
                                         setTitle("Error")
-                                        setMessage("AH OCURRIDO UN ERROR CON EL USUSARIO" + exception.message)
+                                        setMessage("HA OCURRIDO UN ERROR CON EL USUSARIO" + exception.message)
                                         setPositiveButton("OK", null)
                                     }.show()
                                 }

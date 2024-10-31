@@ -33,10 +33,27 @@ class displayfeed : AppCompatActivity() {
             val intent = Intent(this, displayregistrer::class.java)
             startActivity(intent)
 
-
-
-        }
         }
 
+        val botonInicio: ImageButton = findViewById(R.id.boton_inicio)
+        botonInicio.setOnClickListener {
+            // Acción para ir al layout de inicio
+            val intent = Intent(this, displayfeed::class.java)
+            startActivity(intent)
         }
+        val seguidoresButton: ImageButton = findViewById(R.id.seguidores_button)
+        seguidoresButton.setOnClickListener {
+            // Acción para ir a la pantalla de seguidores
+            val intent = Intent(this, display_seguidores::class.java)
+            startActivity(intent)
+        }
+        val perfilUsuarioButton: ImageButton = findViewById(R.id.boton_user)
+        seguidoresButton.setOnClickListener {
+            // Acción para ir a la pantalla de seguidores
+            val intent = Intent(this, perfil_usuario::class.java)
+            startActivity(intent)
+        }
+    }
+
+}
 

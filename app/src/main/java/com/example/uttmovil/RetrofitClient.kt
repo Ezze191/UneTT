@@ -4,7 +4,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object RetrofitClient {
-    private const val BASE_URL =  "http://10.0.2.2/"
+    private const val BASE_URL =  "http://127.0.0.1/"
 
     // Crear interceptor de logging
     val retrofit: Retrofit by lazy {

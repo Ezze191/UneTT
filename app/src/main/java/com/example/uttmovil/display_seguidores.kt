@@ -28,5 +28,13 @@ class display_seguidores : AppCompatActivity() {
         }
         val intent = Intent(this, display_seguidores::class.java)
         startActivity(intent)
+
+        val botonInicio: ImageButton = findViewById(R.id.boton_inicio)
+        botonInicio.setOnClickListener {
+            // Acción para ir al layout de inicio
+            val intent = Intent(this, displayfeed::class.java)
+            startActivity(intent)
+        }
     }
+
 }
