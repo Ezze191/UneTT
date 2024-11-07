@@ -23,7 +23,12 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-
+        //si el usuario ya habia iniciado session antes lo dirije a la pantalla del feed
+        if(auth.currentUser != null){
+            val intent = Intent(this, displayfeed::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
 

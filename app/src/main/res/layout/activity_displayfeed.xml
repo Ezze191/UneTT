@@ -89,27 +89,59 @@
 
 
                 <!-- Agrega un botón -->
-                <ImageView
-                    android:id="@+id/imagen_publicacion"
-                    android:layout_width="384dp"
-                    android:layout_height="142dp"
-                    android:layout_margin="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="44dp"
-                    android:contentDescription="Descripción de la imagen"
-                    android:src="@drawable/fondo_imagen"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/texto_publicacion" />
 
-                <Button
-                    android:id="@+id/boton_publicacion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginStart="40dp"
-                    android:text="Botón"
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardpost"
+                    android:layout_width="377dp"
+                    android:layout_height="150dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.066"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imagen_publicacion" />
+                    app:layout_constraintTop_toBottomOf="@+id/texto_publicacion"
+                    app:layout_constraintVertical_bias="0.445">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <Button
+                            android:id="@+id/comentarbt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:text="comentar"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                        <EditText
+                            android:id="@+id/textcomment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ems="10"
+                            android:hint="Escribe un comentario"
+                            android:inputType="text"
+                            tools:ignore="TouchTargetSizeCheck" />"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.39"
+                            tools:ignore="TouchTargetSizeCheck"
+                            tools:layout_editor_absoluteX="16dp" />
+
+                        <Button
+                            android:id="@+id/mediaUpload"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="16dp"
+                            android:text="Subir Media"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/comentarbt"
+                            app:layout_constraintTop_toBottomOf="@+id/textcomment" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -184,6 +216,14 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/indicator_1" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewPosts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="68dp"
+                app:layout_constraintTop_toTopOf="@+id/body_text"
+                tools:layout_editor_absoluteX="167dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
