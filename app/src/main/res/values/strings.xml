@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UttMovil</string>
+    <string name="texto_de_publicacion">Texto de publicacion</string>
 </resources>

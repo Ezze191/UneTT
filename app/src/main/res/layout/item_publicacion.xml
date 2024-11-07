@@ -2,45 +2,86 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#A2E9E0E0"
-    android:layout_margin="8dp"
-    android:padding="8dp">
+    android:background="#23C895"
+    android:padding="10dp">
 
-    <!-- Imagen de Publicación -->
-    <ImageView
-        android:id="@+id/imagen_publicacion"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="Imagen de Publicación"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Texto de Publicación -->
-    <TextView
-        android:id="@+id/texto_publicacion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Aquí va el texto de la publicación..."
-        android:textColor="#121111"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/imagen_publicacion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón de Reacción -->
-    <Button
-        android:id="@+id/boton_reaccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Me gusta"
-        app:layout_constraintTop_toBottomOf="@id/texto_publicacion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Ejemplo de una publicación -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="416dp"
+        android:layout_height="318dp"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        tools:ignore="MissingConstraints,VisualLintBounds"
+        tools:layout_editor_absoluteX="-12dp"
+        tools:layout_editor_absoluteY="10dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="145dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/username"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/media_image"
+            android:layout_width="364dp"
+            android:layout_height="134dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/foto_publicacion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/post_content" />
+
+        <TextView
+            android:id="@+id/post_content"
+            android:layout_width="371dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:text="Aquí va el texto de la publicación"
+            android:textColor="#000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.36"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="50dp" />
+
+        <ImageButton
+            android:id="@+id/btstar"
+            android:layout_width="58dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:soundEffectsEnabled="false"
+            android:src="@drawable/like"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/media_image"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="145dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="8dp"
+            android:text="Username"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+

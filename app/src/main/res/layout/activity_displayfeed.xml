@@ -1,5 +1,4 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/texto_Unett"
@@ -14,10 +13,7 @@
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
         <!-- Toolbar que contiene el logo -->
         <com.google.android.material.appbar.MaterialToolbar
@@ -44,163 +40,86 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- ScrollView para el contenido desplazable entre las dos barras -->
+    <!-- ScrollView para el contenido -->
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="405dp"
-        android:layout_height="684dp"
-        app:layout_constraintBottom_toBottomOf="@+id/barra_abajo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBar"
-        tools:ignore="MissingConstraints,NotSibling">
+        android:layout_width="match_parent"
+        android:layout_height="361dp"
+        tools:layout_editor_absoluteY="77dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-
-            android:layout_width="409dp"
-            android:layout_height="548dp"
-            android:padding="0dp"
-            tools:context=".MainActivity">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/espacio_publicaciones"
-                android:layout_width="407dp"
-                android:layout_height="264dp"
-                android:layout_marginTop="136dp"
-                android:background="#A2E9E0E0"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@id/barra_arriba">
+            <!-- Contenedor para publicaciones -->
+            <LinearLayout
+                android:id="@+id/contenedor_publicaciones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="#EAEAEA"
+                android:orientation="vertical"
+                android:padding="10dp">
 
-
-                <TextView
-                    android:id="@+id/texto_publicacion"
-                    android:layout_width="wrap_content"
+                <!-- Ejemplo de una publicación -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginTop="16dp"
-                    android:text="Texto de la publicación"
-                    android:textColor="#141313"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_marginBottom="10dp"
+                    android:background="#FFFFFF"
+                    android:padding="10dp">
 
+                    <ImageView
+                        android:id="@+id/media_image"
+                        android:layout_width="0dp"
+                        android:layout_height="200dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/foto_publicacion"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Agrega un botón -->
-                <ImageView
-                    android:id="@+id/imagen_publicacion"
-                    android:layout_width="384dp"
-                    android:layout_height="142dp"
-                    android:layout_margin="16dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="44dp"
-                    android:contentDescription="Descripción de la imagen"
-                    android:src="@drawable/fondo_imagen"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/texto_publicacion" />
+                    <TextView
+                        android:id="@+id/post_content"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Aquí va el texto de la publicación"
+                        android:textColor="#000"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/media_image" />
 
-                <Button
-                    android:id="@+id/boton_publicacion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginStart="40dp"
-                    android:text="Botón"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imagen_publicacion" />
+                    <ImageButton
+                        android:id="@+id/btstar"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="18dp"
+                        android:src="@drawable/like"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/post_content"
+                        tools:ignore="SpeakableTextPresentCheck" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/headline"
-                android:layout_width="406dp"
-                android:layout_height="26dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/black"
-                android:text="comentarios"
-                android:textColor="#EFE7E7"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.333"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/espacio_publicaciones" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/indicator_1"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:background="#BF7676"
-                app:layout_constraintEnd_toStartOf="@+id/indicator_2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/headline" />
-
-            <TextView
-                android:id="@+id/indicator_2"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:background="#58B15A"
-                app:layout_constraintEnd_toStartOf="@+id/indicator_3"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/indicator_1"
-                app:layout_constraintTop_toBottomOf="@+id/headline" />
-
-            <ImageButton
-                android:id="@+id/indicator_3"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:background="#733434"
-                app:layout_constraintEnd_toStartOf="@+id/indicator_4"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/indicator_2"
-                app:layout_constraintTop_toBottomOf="@+id/headline"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/indicator_4"
-                android:layout_width="0dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="16dp"
-                android:background="#9E4242"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/indicator_3"
-                app:layout_constraintTop_toBottomOf="@+id/headline" />
-
-            <TextView
-                android:id="@+id/body_text"
-                android:layout_width="0dp"
-                android:layout_height="512dp"
-                android:layout_marginTop="12dp"
-                android:background="#A2E9E0E0"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/indicator_1" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <!-- MaterialToolbar inferior con botones -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/barra_abajo"
-        android:layout_width="0dp"
+        android:layout_width="411dp"
         android:layout_height="80dp"
         android:background="#010201"
+        android:gravity="center"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
-        app:layout_constraintStart_toStartOf="parent">
+        tools:layout_editor_absoluteY="811dp">
 
         <!-- Primer botón (boton_inicio) -->
         <ImageButton
