@@ -67,10 +67,12 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/espacio_perfil"
-                android:layout_width="406dp"
-                android:layout_height="228dp"
+                android:layout_width="408dp"
+                android:layout_height="531dp"
                 android:layout_marginTop="136dp"
+                android:layout_marginBottom="18848dp"
                 android:background="#A2E9E0E0"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -81,13 +83,13 @@
                     android:id="@+id/imagen_publicacion"
                     android:layout_width="400dp"
                     android:layout_height="147dp"
-                    android:layout_marginBottom="116dp"
                     android:contentDescription="Descripción de la imagen"
                     android:src="@drawable/fondo_imagen"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.428"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
@@ -99,25 +101,21 @@
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imagen_publicacion"
-                    app:layout_constraintVertical_bias="0.497" />
+                    app:layout_constraintVertical_bias="0.221" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/textname"
                     android:layout_width="300dp"
                     android:layout_height="40dp"
-                    android:text="FERNANDO AYALA"
+                    android:text="USERNAME"
                     android:textAlignment="center"
                     android:textColor="#121111"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.495"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imagen_perfil"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toBottomOf="@+id/imagen_perfil" />
 
                 <Button
                     android:id="@+id/btcerrarsession"
@@ -125,7 +123,15 @@
                     android:layout_height="wrap_content"
                     android:text="Cerrar Session"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/textname" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    tools:layout_editor_absoluteX="4dp"
+                    tools:layout_editor_absoluteY="303dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -163,17 +169,6 @@
 
 
         <!-- Segundo botón (boton_busqueda) -->
-        <ImageButton
-            android:id="@+id/boton_busqueda"
-            android:layout_width="77dp"
-            android:layout_height="77dp"
-            android:backgroundTint="#00FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/boton_inicio"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/search"
-            app:tint="@color/white"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
         <!-- Tercer botón (boton_agregar) -->
         <ImageButton

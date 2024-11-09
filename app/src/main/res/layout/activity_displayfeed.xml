@@ -37,7 +37,8 @@
                 android:layout_gravity="center"
                 android:contentDescription="Logo de la página"
                 android:scaleType="centerCrop"
-                android:src="@drawable/unettl" />
+                android:src="@drawable/unettl"
+                tools:ignore="HardcodedText,VisualLintBounds" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -46,7 +47,7 @@
             android:layout_width="416dp"
             android:layout_height="123dp"
             android:background="#A2E9E0E0"
-            tools:ignore="NotSibling">
+            tools:ignore="NotSibling,VisualLintBounds">
 
 
             <!-- Agrega un botón -->
@@ -59,7 +60,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.066"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintBounds">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -73,7 +75,8 @@
                         android:layout_marginBottom="16dp"
                         android:text="comentar"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:ignore="HardcodedText" />
 
                     <EditText
                         android:id="@+id/textcomment"
@@ -82,12 +85,8 @@
                         android:ems="10"
                         android:hint="Escribe un comentario"
                         android:inputType="text"
-                        tools:ignore="TouchTargetSizeCheck" />"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.39"
-                    tools:ignore="TouchTargetSizeCheck"
-                    tools:layout_editor_absoluteX="16dp" />
+                        tools:ignore="Autofill,HardcodedText,MissingConstraints,TouchTargetSizeCheck" />"
+                    
 
                     <Button
                         android:id="@+id/mediaUpload"
@@ -97,7 +96,8 @@
                         android:layout_marginBottom="16dp"
                         android:text="Subir Media"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/comentarbt" />
+                        app:layout_constraintEnd_toStartOf="@+id/comentarbt"
+                        tools:ignore="HardcodedText" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -122,18 +122,16 @@
         app:layout_constraintTop_toTopOf="@+id/appBar"
         app:layout_constraintVertical_bias="0.987"
         tools:context=".MainActivity"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints,VisualLintBounds">
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewPosts"
             android:layout_width="406dp"
             android:layout_height="531dp"
-            android:layout_marginTop="44dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/espacio_publicaciones" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
