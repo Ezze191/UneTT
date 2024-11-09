@@ -126,12 +126,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/textname" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/textfecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
-                    tools:layout_editor_absoluteX="4dp"
-                    tools:layout_editor_absoluteY="303dp" />
+                    android:text="fecha"
+                    tools:layout_editor_absoluteX="287dp"
+                    tools:layout_editor_absoluteY="189dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
