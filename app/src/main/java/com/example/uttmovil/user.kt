@@ -12,11 +12,21 @@ interface ApiService {
         @Field("password") password: String
     ): Call<Void>
 
-    //consultar el usuario a la base de datos
+    //consultar el usuario a la base de datos y extraer sus datos
     @FormUrlEncoded
     @POST("viewperfileuser.php")
     fun searchUser(
         @Field("email") email: String
     ): Call<String>
+
+    //login user
+    @FormUrlEncoded
+    @POST("log.php")
+    fun loginUser(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ):Call<String>
+
+
 
 }

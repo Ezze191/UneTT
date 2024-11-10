@@ -1,5 +1,5 @@
 package com.example.uttmovil
-
+import retrofit2.Call
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -44,36 +44,16 @@ class MainActivity : AppCompatActivity() {
 
         // evento del click del boton de ingresar
         ingresar.setOnClickListener {
+            //extraer el email y password de los inputs
             val email = inputgmail.text.toString()
             val password = inputpass.text.toString()
 
-            //aqui le estamos diciendo que tiene que iniciar seccion con el email y password
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnSuccessListener {
-                    //si todo esta bien aqui va hacer algo
-                    //crea una instancia para si el usuario verifico su correo pueda iniciar session
-                    val user = FirebaseAuth.getInstance().currentUser
+            //verificar si existe en la base de datos de mysql
+            loginUsuario(email, password)
 
-                    if(user?.isEmailVerified == true) {
-                        //si el correo esta verificado lo dirije a la pantalla del feed
-                        val intent = Intent(this, displayfeed::class.java)
-                        startActivity(intent)
-                        finish()
 
-                    }else{
-                        // si el correo no esta verficado lanza un error
-                       FirebaseAuth.getInstance().signOut()
-                        AlertDialog.Builder(this).apply {
-                            setTitle("ERROR AL INICIAR SESSION  ")
-                            setMessage("Debes de verificar tu correo para continuar")
-                            setPositiveButton("OK", null)
-                        }.show()
-                    }
-                }
-                .addOnFailureListener {
-                    //si todo esta mal aqui va hacer algo
-                    utiles.showerror(this, it.message.toString())
-                }
+
+
         }
         //evento de click en el boton de registrarte
         btreg.setOnClickListener {
@@ -81,5 +61,80 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+    private fun loginUsuario(email: String, password: String) {
+        // Llamamos a la API que hace la consulta a log.php para verificar el login
+        val call = RetrofitClient.apiService.loginUser(email, password)
+        call.enqueue(object : retrofit2.Callback<String> {
+            override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                if (response.isSuccessful) {
+                    // Obtener el cuerpo de la respuesta
+                    val responseBody = response.body()?.trim() ?: ""
+
+                    // Limpiar la respuesta eliminando el prefijo 'conexionexitosa' si está presente
+                    val cleanedResponse = responseBody.replace("conexionexitosa", "").trim()
+
+                    // Verificamos si el login fue exitoso
+                    if (cleanedResponse == "Usuario encontrado") {
+                        // Si el login es exitoso
+                        //verificar si existe en firebase la misma cuenta
+                        LoginFireBase(email, password)
+
+                    } else {
+                        // Si no se encuentra el usuario, mostramos un mensaje de error
+                        AlertDialog.Builder(this@MainActivity).apply {
+                            setTitle("Login Error")
+                            setMessage("Usuario no encontrado o contraseña incorrecta.")
+                            setPositiveButton("OK", null)
+                        }.show()
+                    }
+                } else {
+                    // En caso de error en la respuesta de la API
+                    AlertDialog.Builder(this@MainActivity).apply {
+                        setTitle("Retrofit Error")
+                        setMessage("Error en la respuesta: ${response.message()}")
+                        setPositiveButton("OK", null)
+                    }.show()
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                // En caso de error en la llamada (fallo en la red, por ejemplo)
+                AlertDialog.Builder(this@MainActivity).apply {
+                    setTitle("Retrofit Error")
+                    setMessage("Excepción: ${t.message}")
+                    setPositiveButton("OK", null)
+                }.show()
+            }
+        })
+    }
+    private fun LoginFireBase(email: String, password: String){
+        //aqui le estamos diciendo que tiene que iniciar seccion con el email y password
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                //si todo esta bien aqui va hacer algo
+                //crea una instancia para si el usuario verifico su correo pueda iniciar session
+                val user = FirebaseAuth.getInstance().currentUser
+
+                if(user?.isEmailVerified == true) {
+                    //si el correo esta verificado lo dirije a la pantalla del feed
+                    val intent = Intent(this, displayfeed::class.java)
+                    startActivity(intent)
+                    finish()
+
+                }else{
+                    // si el correo no esta verficado lanza un error
+                    FirebaseAuth.getInstance().signOut()
+                    AlertDialog.Builder(this).apply {
+                        setTitle("ERROR AL INICIAR SESSION  ")
+                        setMessage("Debes de verificar tu correo para continuar")
+                        setPositiveButton("OK", null)
+                    }.show()
+                }
+            }
+            .addOnFailureListener {
+                //si todo esta mal aqui va hacer algo
+                utiles.showerror(this, it.message.toString())
+            }
     }
 }
