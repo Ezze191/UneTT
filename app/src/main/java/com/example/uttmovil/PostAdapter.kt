@@ -15,6 +15,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         val usernameTextView: TextView = itemView.findViewById(R.id.username)
         val postTextView: TextView = itemView.findViewById(R.id.post_content)
         val postImageView: ImageView = itemView.findViewById(R.id.media_image)  // ImageView para la imagen
+        val dateTextView: TextView = itemView.findViewById(R.id.post_date)  // TextView para la fecha
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -27,11 +28,18 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         holder.usernameTextView.text = post.username
         holder.postTextView.text = post.post
 
+        // Mostrar la fecha formateada
+        val formattedDate = post.getFormattedDate()  // Obtén la fecha formateada
+        holder.dateTextView.text = formattedDate
+
         // Si hay una URL de imagen, cargarla en el ImageView
         post.mediaURL?.let { url ->
             Glide.with(holder.itemView.context)
                 .load(url) // Cargar la URL de la imagen
                 .into(holder.postImageView) // Establecer la imagen en el ImageView
+
+            // Hacer visible el ImageView si hay imagen
+            holder.postImageView.visibility = View.VISIBLE
         } ?: run {
             // Si no hay URL de imagen, ocultar el ImageView
             holder.postImageView.visibility = View.GONE
