@@ -3,6 +3,7 @@ package com.example.uttmovil
 import Post
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -10,14 +11,12 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.firestore.FieldValue
-import java.io.File
 
 class displayfeed : AppCompatActivity() {
 
@@ -30,7 +29,7 @@ class displayfeed : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     val storage = FirebaseStorage.getInstance()
 
-    var selectedFile: File? = null
+    var selectedFileUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +60,6 @@ class displayfeed : AppCompatActivity() {
                 }
                 postAdapter.notifyDataSetChanged()
             }
-
-
 
         val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
 
@@ -101,9 +98,9 @@ class displayfeed : AppCompatActivity() {
             val content = postContent.text.toString()
             var mediaUrl: String? = null
 
-            if (selectedFile != null) {
-                val storageRef = storage.reference.child("posts/${user.uid}/${selectedFile?.name}")
-                val uploadTask = storageRef.putFile(selectedFile!!.toUri())
+            if (selectedFileUri != null) {
+                val storageRef = storage.reference.child("posts/${user.uid}/${selectedFileUri?.lastPathSegment}")
+                val uploadTask = storageRef.putFile(selectedFileUri!!)  // Usa la URI directamente aquí
                 uploadTask.addOnSuccessListener {
                     storageRef.downloadUrl.addOnSuccessListener { uri ->
                         mediaUrl = uri.toString()
@@ -137,11 +134,11 @@ class displayfeed : AppCompatActivity() {
 
     private val pickFileLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         if (uri != null) {
-            selectedFile = File(uri.path)
+            selectedFileUri = uri  // Almacena la URI seleccionada
         }
     }
 
     fun openFilePicker() {
-        pickFileLauncher.launch("*/*")
+        pickFileLauncher.launch("image/*")  // Limita la selección solo a imágenes
     }
 }
