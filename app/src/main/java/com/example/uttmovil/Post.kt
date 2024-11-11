@@ -6,7 +6,11 @@ data class Post(
     val username: String? = null,
     val date: Timestamp? = null,
     val post: String? = null,
-    val mediaURL: String? = null
+    val postId: String? = null,
+    val mediaURL: String? = null,
+    var likes: Int = 0,
+    var likedBy: MutableList<String> = mutableListOf()
+
 ) {
     // Función para convertir el Timestamp en un formato legible
     fun getFormattedDate(): String? {

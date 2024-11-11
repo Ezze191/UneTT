@@ -55,8 +55,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/post_content" />
 
+    <TextView
+        android:id="@+id/likes_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0" />
+
     <ImageButton
-        android:id="@+id/btstar"
+        android:id="@+id/like_button"
         android:layout_width="58dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
@@ -66,6 +72,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/media_image"
         tools:ignore="SpeakableTextPresentCheck" />
+
+
 
 
 </LinearLayout>

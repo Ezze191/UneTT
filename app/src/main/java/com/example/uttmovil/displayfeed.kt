@@ -53,7 +53,7 @@ class displayfeed : AppCompatActivity() {
 
                 postList.clear()
                 snapshot?.documents?.forEach { document ->
-                    val post = document.toObject(Post::class.java)
+                    val post = document.toObject(Post::class.java)?.copy(postId = document.id)
                     if (post != null) {
                         postList.add(post)
                     }
@@ -120,6 +120,8 @@ class displayfeed : AppCompatActivity() {
             "username" to auth.currentUser?.email,
             "date" to FieldValue.serverTimestamp(),
             "post" to content,
+            "likes" to 0,
+            "likedBy" to emptyList<String>(),
             "mediaURL" to mediaUrl
         )
 
