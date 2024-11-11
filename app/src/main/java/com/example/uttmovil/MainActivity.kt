@@ -11,9 +11,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
+/* INDICE
+* L - LOGIN
+* R - REGISTER */
+
+
 
 class MainActivity : AppCompatActivity() {
-    //obtener objeto de firebase para la autotentificacion
+    //esta es una funcion de firebase que permite conectar con google para la autotentificacion del user
     private val auth = FirebaseAuth.getInstance()
 
 
@@ -23,7 +28,8 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        //si el usuario ya habia iniciado session antes lo dirije a la pantalla del feed
+       /*funcion de firebase que permite detectar si el usuario ya habia iniciado session antes
+       * guarda la session y lo manda al displayfeed */
         if(auth.currentUser != null){
             val intent = Intent(this, displayfeed::class.java)
             startActivity(intent)
@@ -48,7 +54,8 @@ class MainActivity : AppCompatActivity() {
             val email = inputgmail.text.toString()
             val password = inputpass.text.toString()
 
-            //verificar si existe en la base de datos de mysql
+            //L1.verificar si existe en la base de datos de mysql basandose en el email y password
+            //que el usuario ha proporcionado en los inputs inputgmail y inputpass
             loginUsuario(email, password)
 
 
@@ -62,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+    //L2.esta es una funcion que hace una consulta a la base de datos de mysql para verificar el login
     private fun loginUsuario(email: String, password: String) {
         // Llamamos a la API que hace la consulta a log.php para verificar el login
         val call = RetrofitClient.apiService.loginUser(email, password)
@@ -77,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                     // Verificamos si el login fue exitoso
                     if (cleanedResponse == "Usuario encontrado") {
                         // Si el login es exitoso
-                        //verificar si existe en firebase la misma cuenta
+                        //l3.Verificar si el mismo usuario proporcionado existe en firebase
                         LoginFireBase(email, password)
 
                     } else {
@@ -108,6 +116,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+    //L4. esta funcion nos permite checar si el usuario proporcionado existe en firebase
     private fun LoginFireBase(email: String, password: String){
         //aqui le estamos diciendo que tiene que iniciar seccion con el email y password
         auth.signInWithEmailAndPassword(email, password)
@@ -117,7 +126,7 @@ class MainActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
 
                 if(user?.isEmailVerified == true) {
-                    //si el correo esta verificado lo dirije a la pantalla del feed
+                    //L5.si el correo esta verificado lo dirije a la pantalla del feed
                     val intent = Intent(this, displayfeed::class.java)
                     startActivity(intent)
                     finish()
