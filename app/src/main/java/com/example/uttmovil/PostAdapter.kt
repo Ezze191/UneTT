@@ -28,6 +28,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         val likesCountTextView: TextView = itemView.findViewById(R.id.likes_count) //texview de contador de likes
         val commentEditText: TextView = itemView.findViewById(R.id.commentEditText) //input de comentario
         val commentButton: Button = itemView.findViewById(R.id.commentButton) //boton de comentario
+        val commentTextView : TextView = itemView.findViewById(R.id.commentText) //texview de comentarios
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -40,9 +41,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         holder.usernameTextView.text = post.username
         holder.postTextView.text = post.post
 
-        // Mostrar la fecha formateada
-        val formattedDate = post.getFormattedDate()  // Obtén la fecha formateada
-        holder.dateTextView.text = formattedDate
+
 
         // Si hay una URL de imagen, cargarla en el ImageView
         post.mediaURL?.let { url ->
@@ -88,6 +87,20 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
             }?: println("FirestoreError postId is null, cannot update Firestore.")
 
         }
+
+        //manejar que se vean los comentarios aqui
+        val commentText = buildString {
+            post.comments.forEach { comment ->
+                append("${comment.username}\n")
+                append("Fecha: ${comment.date?.toDate()?.toString() ?: "Desconocida"}):\n")
+                append("\n")
+                append("${comment.comment}\n")
+                append("\n")
+            }
+        }
+        //asigna el contenido al texview
+        holder.commentTextView.text = commentText
+
         //manejar el boton de comentar
         holder.commentButton.setOnClickListener {
             val postid = post.postId

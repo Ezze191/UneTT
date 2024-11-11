@@ -1,5 +1,6 @@
 package com.example.uttmovil
 
+import Comment
 import Post
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -56,8 +57,35 @@ class displayfeed : AppCompatActivity() {
                     val post = document.toObject(Post::class.java)?.copy(postId = document.id)
                     if (post != null) {
                         postList.add(post)
+
+                        // Cargar los comentarios
+                        db.collection("post")
+                            .document(post.postId!!)
+                            .collection("comments")
+                            .orderBy("date", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                            .addSnapshotListener { commentSnapshot, commentException ->
+                                if (commentException != null) {
+                                    Toast.makeText(this, "Error al cargar comentarios", Toast.LENGTH_SHORT).show()
+                                    return@addSnapshotListener
+                                }
+
+                                // Limpiar los comentarios actuales
+                                post.comments = mutableListOf() // Asegúrate de que la lista sea mutable
+
+                                // Agregar comentarios nuevos
+                                commentSnapshot?.documents?.forEach { commentDocument ->
+                                    val comment = commentDocument.toObject(Comment::class.java)
+                                    if (comment != null) {
+                                        post.comments.add(comment)
+                                    }
+                                }
+                                // Notificar al adaptador para que se actualice
+                                postAdapter.notifyDataSetChanged()
+                            }
                     }
                 }
+
+                // Notificar al adaptador que los datos de publicaciones han cambiado
                 postAdapter.notifyDataSetChanged()
             }
 

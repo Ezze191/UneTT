@@ -9,8 +9,14 @@ data class Post(
     val postId: String? = null,
     val mediaURL: String? = null,
     var likes: Int = 0,
-    var likedBy: MutableList<String> = mutableListOf()
+    var likedBy: MutableList<String> = mutableListOf(),
+    var comments: MutableList<Comment> = mutableListOf() // Cambié esto para que sea mutable
+)
 
+data class Comment(
+    val username: String? = null,
+    val comment: String? = null,
+    val date: Timestamp? = null
 ) {
     // Función para convertir el Timestamp en un formato legible
     fun getFormattedDate(): String? {
