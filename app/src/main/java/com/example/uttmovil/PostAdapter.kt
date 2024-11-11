@@ -1,5 +1,7 @@
 package com.example.uttmovil
 
+import java.util.Locale
+import java.text.SimpleDateFormat
 import Post
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +56,13 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         } ?: run {
             // Si no hay URL de imagen, ocultar el ImageView
             holder.postImageView.visibility = View.GONE
+        }
+
+        post.date?.toDate()?.let {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            holder.dateTextView.text = dateFormat.format(it)
+        } ?: run {
+            holder.dateTextView.text = "Fecha desconocida"
         }
 
         //configuracion del boton de like
