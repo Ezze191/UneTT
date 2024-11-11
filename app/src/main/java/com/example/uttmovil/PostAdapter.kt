@@ -4,13 +4,16 @@ import Post
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlin.math.log
 
@@ -23,6 +26,8 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         val dateTextView: TextView = itemView.findViewById(R.id.post_date)  // TextView para la fecha
         val likeButton : ImageButton = itemView.findViewById(R.id.like_button) //boton de like
         val likesCountTextView: TextView = itemView.findViewById(R.id.likes_count) //texview de contador de likes
+        val commentEditText: TextView = itemView.findViewById(R.id.commentEditText) //input de comentario
+        val commentButton: Button = itemView.findViewById(R.id.commentButton) //boton de comentario
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -83,6 +88,40 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
             }?: println("FirestoreError postId is null, cannot update Firestore.")
 
         }
+        //manejar el boton de comentar
+        holder.commentButton.setOnClickListener {
+            val postid = post.postId
+            val commentText = holder.commentEditText.text.toString()
+
+            if(commentText.isNotEmpty()){
+                val comment = hashMapOf(
+                    "username" to FirebaseAuth.getInstance().currentUser?.email,
+                    "comment" to commentText,
+                    "date" to FieldValue.serverTimestamp()
+                )
+                //guardar los comentarios en la coleccion de comentarios
+                if (postid != null) {
+                    FirebaseFirestore.getInstance()
+                        .collection("post")
+                        .document(postid)
+                        .collection("comments")
+                        .add(comment)
+                        .addOnSuccessListener {
+                            Toast.makeText(holder.itemView.context, "Comentario agregado", Toast.LENGTH_SHORT).show()
+                            holder.commentEditText.text = ""
+                        }
+                        .addOnFailureListener{e ->
+                            Toast.makeText(holder.itemView.context, "Error al agregar el comentario" + e.message, Toast.LENGTH_SHORT).show()
+                        }
+
+                }
+            }
+
+
+
+
+        }
+
 
     }
 

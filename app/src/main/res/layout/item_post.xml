@@ -47,7 +47,7 @@
     <ImageView
         android:id="@+id/media_image"
         android:layout_width="wrap_content"
-        android:layout_height="514dp"
+        android:layout_height="354dp"
         android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/foto_publicacion"
@@ -73,7 +73,21 @@
         app:layout_constraintTop_toBottomOf="@+id/media_image"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <EditText
+        android:id="@+id/commentEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Escribe un comentario..."
+        android:inputType="text"
+        tools:ignore="TouchTargetSizeCheck" />
 
+    <Button
+        android:id="@+id/commentButton"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:text="comentar"
+        tools:ignore="TouchTargetSizeCheck" />
 
 
 </LinearLayout>
