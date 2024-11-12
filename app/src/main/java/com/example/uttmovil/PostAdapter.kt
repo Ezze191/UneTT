@@ -139,11 +139,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                 }
             }
 
-
-
-
         }
-
 
     }
 

@@ -28,9 +28,12 @@ class perfil_usuario : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        val userEmail: String? = currentUser?.email
 
         //mando a llamar a la funcion para obtener los datos desde mysql
-        obtenerDatosUsuario("22170039@uttcampus.edu.mx")
+        obtenerDatosUsuario(userEmail.toString())
 
 
         //encuentra el id del boton de cerrar session
@@ -67,6 +70,25 @@ class perfil_usuario : AppCompatActivity() {
                         // Aquí guardas el nombre de usuario limpio en el TextView
                         val textuser = findViewById<TextView>(R.id.textname)
                         textuser.text = userName
+
+                        //aqui remplaza la fecha
+                        val textfecha = findViewById<TextView>(R.id.fechatext)
+                        textfecha.text = fecha
+
+                        //aqui remplaza la biografia
+                        val textbiografia = findViewById<TextView>(R.id.biografiatext)
+                        textbiografia.text = biografia
+
+                        //aqui remplaza el correo
+                        val textcorreo = findViewById<TextView>(R.id.correotext)
+                        textcorreo.text = email
+
+                        //aqui remplaza la matricula
+                        val matricula = email.filter { it.isDigit() }.toIntOrNull() ?: 0
+                        val textmatricula = findViewById<TextView>(R.id.matriculatext)
+                        textmatricula.text = matricula.toString()
+
+
                     } else {
                         AlertDialog.Builder(this@perfil_usuario).apply {
                             setTitle("Retrofit Error")

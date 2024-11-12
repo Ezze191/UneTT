@@ -88,8 +88,13 @@ class displayregistrer : AppCompatActivity() {
                                     //R10.si el correo se envio correctamente va hacer esto
                                     if (emailTask.isSuccessful) {
                                             //R11.si es correcto se va a enviar a una pantalla de verificacion de correo
-                                            val intent = Intent(this, verificationemaildisplay::class.java)
-                                            startActivity(intent)
+                                        AlertDialog.Builder(this@displayregistrer).apply {
+                                            setTitle("Registro exitoso")
+                                            setMessage("Verifica tu correo para iniciar sesion")
+                                            setPositiveButton("OK", null)
+                                            
+
+                                        }.show()
 
                                         //R11.y si es correcto lo va a registrar a la base de datos de muysql
                                         RetrofitClient.apiService.insertUser(correo, username, password)
@@ -105,7 +110,7 @@ class displayregistrer : AppCompatActivity() {
                                                             setMessage("El usuario se registró correctamente en mysql")
                                                             setPositiveButton("OK", null)
 
-                                                        }
+                                                        }.show()
 
                                                     } else {
                                                         // Error al insertar en la base de datos
@@ -128,7 +133,6 @@ class displayregistrer : AppCompatActivity() {
                                             })
 
 
-                                            finish()
 
 
 

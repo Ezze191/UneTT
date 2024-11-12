@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                     val cleanedResponse = responseBody.replace("conexionexitosa", "").trim()
 
                     // Verificamos si el login fue exitoso
-                    if (cleanedResponse == "Usuario encontrado") {
+                    if (cleanedResponse ==  responseBody.replace("conexionexitosa", "").trim()) {
                         // Si el login es exitoso
                         //l3.Verificar si el mismo usuario proporcionado existe en firebase
                         LoginFireBase(email, password)

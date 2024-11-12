@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/colorpublicacion"
     android:padding="16dp">
 
 
@@ -59,14 +60,15 @@
         android:id="@+id/commentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="comentarios" />
+        android:text="comentarios"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/likes_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
-        android:textColor="#A87B02"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <ImageButton
@@ -88,6 +90,7 @@
         android:ems="10"
         android:hint="Escribe un comentario..."
         android:inputType="text"
+        android:textColor="@color/black"
         tools:ignore="TouchTargetSizeCheck" />
 
     <Button

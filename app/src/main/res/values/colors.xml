@@ -4,4 +4,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name = 'black_opacity'>#69F5F5F5</color>
     <color name = 'blue' >#2499FF</color>
+    <color name = 'colorpublicacion'>#1a906c</color>
 </resources>
