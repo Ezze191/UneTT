@@ -6,6 +6,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -33,7 +34,7 @@ class perfil_usuario : AppCompatActivity() {
 
 
         //encuentra el id del boton de cerrar session
-        val bt_cerrar  = findViewById<Button>(R.id.btcerrarsession)
+        val bt_cerrar  = findViewById<ImageButton>(R.id.logOutBt)
 
         bt_cerrar.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

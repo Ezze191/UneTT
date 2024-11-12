@@ -141,11 +141,12 @@
         android:layout_width="0dp"
         android:layout_height="80dp"
         android:background="#010201"
+        android:gravity="center"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <!-- Primer botón (boton_inicio) -->
