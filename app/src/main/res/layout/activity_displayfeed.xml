@@ -152,7 +152,7 @@
         <!-- Primer botón (boton_inicio) -->
         <ImageButton
             android:id="@+id/boton_inicio"
-            android:layout_width="77sp"
+            android:layout_width="78sp"
             android:layout_height="77sp"
             android:backgroundTint="#00FFFFFF"
             android:scaleType="fitCenter"
