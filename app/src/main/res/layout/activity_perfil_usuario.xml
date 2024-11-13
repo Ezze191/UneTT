@@ -44,15 +44,10 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="409dp"
-        android:layout_height="715dp"
-        android:layout_marginTop="75dp"
-        app:layout_constraintBottom_toBottomOf="@+id/barra_abajo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBar"
-        tools:ignore="MissingConstraints,NotSibling">
+        android:layout_width="405dp"
+        android:layout_height="598dp"
+        tools:ignore="MissingConstraints,NotSibling"
+        tools:layout_editor_absoluteX="16dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,12 +63,8 @@
                 android:layout_width="405dp"
                 android:layout_height="721dp"
                 android:background="#A2E9E0E0"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="133dp">
 
 
                 <EditText
@@ -148,19 +139,22 @@
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/imagen_publicacion"
-                    app:layout_constraintVertical_bias="0.137" />
+                    app:layout_constraintVertical_bias="0.123" />
 
                 <TextView
                     android:id="@+id/textname"
                     android:layout_width="300dp"
                     android:layout_height="40dp"
+                    android:layout_marginTop="20dp"
                     android:text="USERNAME"
                     android:textAlignment="center"
                     android:textColor="#121111"
                     android:textSize="24sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imagen_perfil" />
 
@@ -209,10 +203,10 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <!-- Primer botón (boton_inicio) -->
         <ImageButton

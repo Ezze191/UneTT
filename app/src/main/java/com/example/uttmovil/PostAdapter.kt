@@ -31,6 +31,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         val commentEditText: TextView = itemView.findViewById(R.id.commentEditText) //input de comentario
         val commentButton: Button = itemView.findViewById(R.id.commentButton) //boton de comentario
         val commentTextView : TextView = itemView.findViewById(R.id.commentText) //texview de comentarios
+        val deleteButton : Button = itemView.findViewById(R.id.btdelete) //boton de eliminar
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
@@ -42,6 +43,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         val post = posts[position]
         holder.usernameTextView.text = post.username
         holder.postTextView.text = post.post
+        val currentUserId = FirebaseAuth.getInstance().currentUser?.uid //para ver el id del usuario
 
 
 
@@ -141,6 +143,34 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
 
         }
 
+        if (post.userId == currentUserId) {
+            holder.deleteButton.visibility = View.VISIBLE
+        } else {
+            holder.deleteButton.visibility = View.GONE
+        }
+
+        //boton de eliminar publicacion
+        holder.deleteButton.setOnClickListener {
+            AlertDialog.Builder(holder.itemView.context).apply {
+                setTitle("Eliminar publicación")
+                setMessage("¿Estás seguro de que deseas eliminar esta publicación?")
+                setPositiveButton("Sí") { _, _ ->
+                    post.postId?.let { postId ->
+                        FirebaseFirestore.getInstance().collection("post").document(postId)
+                            .delete()
+                            .addOnSuccessListener {
+                                Toast.makeText(holder.itemView.context, "Publicación eliminada", Toast.LENGTH_SHORT).show()
+                                (posts as MutableList).removeAt(position)
+                                notifyItemRemoved(position)
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(holder.itemView.context, "Error al eliminar: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+                setNegativeButton("No", null)
+            }.show()
+        }
     }
 
     override fun getItemCount(): Int {

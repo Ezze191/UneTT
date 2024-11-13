@@ -150,7 +150,8 @@ class displayfeed : AppCompatActivity() {
             "post" to content,
             "likes" to 0,
             "likedBy" to emptyList<String>(),
-            "mediaURL" to mediaUrl
+            "mediaURL" to mediaUrl,
+            "userId" to auth.currentUser?.uid
         )
 
         db.collection("post").add(post)

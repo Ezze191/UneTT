@@ -105,12 +105,7 @@ class displayregistrer : AppCompatActivity() {
                                                 ) {
                                                     if (response.isSuccessful) {
                                                         //R12.Si se registro correctamente en mysql va a mostrar un mensaje
-                                                        AlertDialog.Builder(this@displayregistrer).apply {
-                                                            setTitle("Registro exitoso")
-                                                            setMessage("El usuario se registró correctamente en mysql")
-                                                            setPositiveButton("OK", null)
 
-                                                        }.show()
 
                                                     } else {
                                                         // Error al insertar en la base de datos
@@ -143,7 +138,7 @@ class displayregistrer : AppCompatActivity() {
                                             setTitle("Error")
                                             setMessage("ALGO SALIO MAL")
                                             setPositiveButton("OK", null)
-                                        }
+                                        }.show()
                                     }
 
                                 }

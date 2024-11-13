@@ -10,7 +10,8 @@ data class Post(
     val mediaURL: String? = null,
     var likes: Int = 0,
     var likedBy: MutableList<String> = mutableListOf(),
-    var comments: MutableList<Comment> = mutableListOf() // Cambié esto para que sea mutable
+    var comments: MutableList<Comment> = mutableListOf() ,// Cambié esto para que sea mutable
+    val userId: String? = null
 )
 
 data class Comment(

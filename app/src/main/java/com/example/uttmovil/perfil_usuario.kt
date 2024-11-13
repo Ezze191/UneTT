@@ -35,6 +35,11 @@ class perfil_usuario : AppCompatActivity() {
         //mando a llamar a la funcion para obtener los datos desde mysql
         obtenerDatosUsuario(userEmail.toString())
 
+        val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
+        bt_inicio.setOnClickListener {
+            val intent = Intent(this, displayfeed::class.java)
+            startActivity(intent)
+        }
 
         //encuentra el id del boton de cerrar session
         val bt_cerrar  = findViewById<ImageButton>(R.id.logOutBt)
