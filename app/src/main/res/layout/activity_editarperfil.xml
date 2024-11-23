@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#23C895"
+    android:orientation="vertical"
     tools:context=".displayfeed"
     tools:ignore="ExtraText">
 
@@ -78,6 +79,45 @@
 
 
                 <TextView
+                    android:id="@+id/matriculatxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Matricula"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/matriculatext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.138"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textname"
+                    app:layout_constraintVertical_bias="0.47" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha de creacion"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/fechaCreacion_txt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.171"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/biografiatext"
+                    app:layout_constraintVertical_bias="0.56" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Correo"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/correotext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.138"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/matriculatext"
+                    app:layout_constraintVertical_bias="0.52" />
+
+                <TextView
                     android:id="@+id/correotext"
                     android:layout_width="302dp"
                     android:layout_height="48dp"
@@ -95,7 +135,7 @@
                     tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits" />
 
                 <TextView
-                    android:id="@+id/fechatext"
+                    android:id="@+id/fechaCreacion_txt"
                     android:layout_width="302dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="92dp"
@@ -115,7 +155,7 @@
                     android:id="@+id/matriculatext"
                     android:layout_width="302dp"
                     android:layout_height="48dp"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="36dp"
                     android:editable="false"
                     android:ems="10"
                     android:inputType="text"
@@ -123,7 +163,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.472"
+                    app:layout_constraintHorizontal_bias="0.466"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textname"
                     tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits" />
@@ -187,17 +227,30 @@
                     android:id="@+id/biografiatext"
                     android:layout_width="302dp"
                     android:layout_height="48dp"
-                    android:layout_marginTop="104dp"
+                    android:layout_marginTop="84dp"
                     android:ems="10"
                     android:inputType="text"
                     android:text="Biografía:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.485"
+                    app:layout_constraintHorizontal_bias="0.466"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/correotext"
                     tools:ignore="Autofill,HardcodedText,LabelFor,TextViewEdits" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Biografia"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/biografiatext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.138"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/correotext"
+                    app:layout_constraintVertical_bias="0.611" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
