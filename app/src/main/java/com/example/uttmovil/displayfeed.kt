@@ -92,7 +92,7 @@ class displayfeed : AppCompatActivity() {
         val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
 
         bt_inicio.setOnClickListener {
-            val intent = Intent(this, displayregistrer::class.java)
+            val intent = Intent(this, displayfeed::class.java)
             startActivity(intent)
         }
 
