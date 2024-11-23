@@ -3,6 +3,9 @@ import retrofit2.Call
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -10,7 +13,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.airbnb.lottie.LottieAnimationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+
 /* INDICE
 * L - LOGIN
 * R - REGISTER */
@@ -28,8 +36,11 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-       /*funcion de firebase que permite detectar si el usuario ya habia iniciado session antes
-       * guarda la session y lo manda al displayfeed */
+
+
+
+        /*funcion de firebase que permite detectar si el usuario ya habia iniciado session antes
+        * guarda la session y lo manda al displayfeed */
         if(auth.currentUser != null){
             val intent = Intent(this, displayfeed::class.java)
             startActivity(intent)
@@ -127,9 +138,17 @@ class MainActivity : AppCompatActivity() {
 
                 if(user?.isEmailVerified == true) {
                     //L5.si el correo esta verificado lo dirije a la pantalla del feed
+                    /*val intent = Intent(this, displayfeed::class.java)
+                    startActivity(intent) */
+
+
                     val intent = Intent(this, displayfeed::class.java)
-                    startActivity(intent)
-                    finish()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        startActivity(intent)
+                        finish() // Opcional, si quieres cerrar esta actividad
+                    }, 2000)
+
+
 
                 }else{
                     // si el correo no esta verficado lanza un error

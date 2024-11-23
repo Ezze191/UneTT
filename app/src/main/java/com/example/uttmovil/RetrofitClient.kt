@@ -5,7 +5,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = "http://18.218.68.217/"
+    private const val BASE_URL = "http://10.0.2.2/"
 
     // Configuración de Retrofit con Scalars para texto plano y Gson para JSON
     val retrofit: Retrofit by lazy {

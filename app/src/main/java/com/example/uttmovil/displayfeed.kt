@@ -6,6 +6,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -18,6 +21,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.firestore.FieldValue
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import com.airbnb.lottie.LottieAnimationView
 
 class displayfeed : AppCompatActivity() {
 
@@ -35,6 +42,27 @@ class displayfeed : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_displayfeed)
+
+        val lottieAnimationView = findViewById<LottieAnimationView>(R.id.lottieAnimationView)
+
+        // Iniciar la animación
+        lottieAnimationView.playAnimation()
+
+        // Crear un Handler para ejecutar después de 3 segundos
+        Handler(Looper.getMainLooper()).postDelayed({
+            // Aplicar animación de desvanecimiento
+            lottieAnimationView.animate()
+                .alpha(0f) // Cambiar la opacidad a 0
+                .setDuration(500) // Duración del fade-out (en milisegundos)
+                .withEndAction {
+                    // Ocultar el LottieAnimationView después de desvanecerse
+                    lottieAnimationView.visibility = View.GONE
+                }
+        }, 3000)
+
+
+
+
 
         // Inicializa el RecyclerView
         recyclerView = findViewById(R.id.recyclerViewPosts)
@@ -157,6 +185,7 @@ class displayfeed : AppCompatActivity() {
         db.collection("post").add(post)
             .addOnSuccessListener {
                 Toast.makeText(this, "Publicación exitosa", Toast.LENGTH_SHORT).show()
+                uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString())
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Error al publicar", Toast.LENGTH_SHORT).show()
@@ -171,5 +200,39 @@ class displayfeed : AppCompatActivity() {
 
     fun openFilePicker() {
         pickFileLauncher.launch("image/*")  // Limita la selección solo a imágenes
+    }
+    fun uploadpost(username : String, post : String, mediaURL : String, date: String){
+        // Llamada a Retrofit para enviar la publicación
+        val postRequest = PostRequest(
+            username = username,
+            post = post,
+            mediaURL = mediaURL,  // URL de la imagen, si hay
+            date = date
+        )
+
+        RetrofitClient.apiService.createPost(postRequest).enqueue(object : Callback<Map<String, Any>> {
+            override fun onResponse(
+                call: Call<Map<String, Any>>,
+                response: Response<Map<String, Any>>
+            ) {
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    val success = result?.get("success") as? Boolean ?: false
+                    if (success) {
+                        Toast.makeText(this@displayfeed, "Publicación creada exitosamente", Toast.LENGTH_LONG).show()
+                    } else {
+                        val errorMessage = result?.get("error") as? String ?: "Error desconocido"
+                        Toast.makeText(this@displayfeed, "Error: $errorMessage", Toast.LENGTH_LONG).show()
+                    }
+                } else {
+                    Toast.makeText(this@displayfeed, "Error en la respuesta del servidor", Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Map<String, Any>>, t: Throwable) {
+                Toast.makeText(this@displayfeed, "Fallo en la conexión: ${t.message}", Toast.LENGTH_LONG).show()
+            }
+        })
+
     }
 }

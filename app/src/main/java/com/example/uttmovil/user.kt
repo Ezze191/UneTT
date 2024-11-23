@@ -27,6 +27,11 @@ interface ApiService {
         @Field("password") password: String
     ):Call<String>
 
+    // Agregar publicación a la base de datos
+    @POST("guardarPublicacion.php") // Ruta de tu archivo PHP que maneja publicaciones
+    fun createPost(
+        @Body postRequest: PostRequest  // Asegúrate de que el modelo tenga las variables correctas
+    ): Call<Map<String, Any>>
 
 
 }
