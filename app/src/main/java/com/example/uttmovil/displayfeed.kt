@@ -39,29 +39,11 @@ class displayfeed : AppCompatActivity() {
 
     var selectedFileUri: Uri? = null
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_displayfeed)
-
-        val lottieAnimationView = findViewById<LottieAnimationView>(R.id.lottieAnimationView)
-
-        // Iniciar la animación
-        lottieAnimationView.playAnimation()
-
-        // Crear un Handler para ejecutar después de 3 segundos
-        Handler(Looper.getMainLooper()).postDelayed({
-            // Aplicar animación de desvanecimiento
-            lottieAnimationView.animate()
-                .alpha(0f) // Cambiar la opacidad a 0
-                .setDuration(500) // Duración del fade-out (en milisegundos)
-                .withEndAction {
-                    // Ocultar el LottieAnimationView después de desvanecerse
-                    lottieAnimationView.visibility = View.GONE
-                }
-        }, 3000)
-
-
-
 
 
         // Inicializa el RecyclerView
@@ -116,6 +98,8 @@ class displayfeed : AppCompatActivity() {
                 // Notificar al adaptador que los datos de publicaciones han cambiado
                 postAdapter.notifyDataSetChanged()
             }
+
+
 
         val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
 
@@ -184,11 +168,12 @@ class displayfeed : AppCompatActivity() {
 
         db.collection("post").add(post)
             .addOnSuccessListener {
-                Toast.makeText(this, "Publicación exitosa", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Publicación exitosa en FB", Toast.LENGTH_SHORT).show()
+                //se sube a la base de datos de mysql
                 uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString())
             }
             .addOnFailureListener {
-                Toast.makeText(this, "Error al publicar", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al publicar en FB", Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -219,7 +204,7 @@ class displayfeed : AppCompatActivity() {
                     val result = response.body()
                     val success = result?.get("success") as? Boolean ?: false
                     if (success) {
-                        Toast.makeText(this@displayfeed, "Publicación creada exitosamente", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@displayfeed, "Publicación creada exitosamente en la base de datos", Toast.LENGTH_LONG).show()
                     } else {
                         val errorMessage = result?.get("error") as? String ?: "Error desconocido"
                         Toast.makeText(this@displayfeed, "Error: $errorMessage", Toast.LENGTH_LONG).show()
