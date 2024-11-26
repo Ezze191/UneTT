@@ -55,6 +55,12 @@ class perfil_usuario : AppCompatActivity() {
 
         }
 
+        //boton de editar perfil
+        val bt_editar_perfil = findViewById<Button>(R.id.bt_editar_perfil)
+        bt_editar_perfil.setOnClickListener {
+            val intent = Intent(this, editarperfil::class.java)
+            startActivity(intent)
+        }
 
 
 
