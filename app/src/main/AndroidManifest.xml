@@ -18,6 +18,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".EspacioPubli"
+            android:exported="false" />
+        <activity
+            android:name=".espacio"
+            android:exported="false" />
+        <activity
+            android:name=".espaciopublicar"
+            android:exported="false" />
+        <activity
             android:name=".editarperfil"
             android:exported="false" />
         <activity

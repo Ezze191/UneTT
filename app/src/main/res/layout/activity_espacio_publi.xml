@@ -1,23 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/texto_Unett"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#23C895"
-    tools:context=".displayfeed"
-    tools:ignore="ExtraText">
-
-    <!-- AppBar con el logo -->
+    tools:context=".EspacioPubli">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintEnd_toEndOf="parent">
 
 
         <!-- Toolbar que contiene el logo -->
@@ -43,6 +40,30 @@
 
         </com.google.android.material.appbar.MaterialToolbar>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/espacio_publicaciones"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#A2E9E0E0"
+            tools:ignore="NotSibling,VisualLintBounds">
+
+
+            <!-- Agrega un botón -->
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardpost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.066"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="VisualLintBounds">
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -51,34 +72,10 @@
 
     <!-- MaterialToolbar inferior con botones -->
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-
-        android:layout_width="409dp"
-        android:layout_height="719dp"
-        android:padding="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/barra_abajo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBar"
-        tools:context=".MainActivity"
-        tools:ignore="MissingConstraints,VisualLintBounds">
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewPosts"
-            android:layout_width="397dp"
-            android:layout_height="674dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/barra_abajo"
-        android:layout_width="411dp"
+        android:layout_width="0dp"
         android:layout_height="80dp"
         android:background="#010201"
         android:gravity="center"
@@ -86,6 +83,7 @@
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
         <!-- Primer botón (boton_inicio) -->
@@ -157,5 +155,57 @@
             tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
     </com.google.android.material.appbar.MaterialToolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/barra_abajo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBar"
+        tools:ignore="ExtraText">
+
+        <Button
+            android:id="@+id/btcomentar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="comentar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="HardcodedText" />
+
+        "
+
+
+        <EditText
+            android:id="@+id/comenttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Escribe un comentario"
+            android:inputType="text"
+            app:layout_constraintBottom_toTopOf="@+id/mediaUpload"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.804"
+            tools:ignore="Autofill,HardcodedText,MissingConstraints,TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/mediaUpload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="Subir Media"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/comentarbt"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

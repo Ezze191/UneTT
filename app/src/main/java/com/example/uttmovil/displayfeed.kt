@@ -73,15 +73,23 @@ class displayfeed : AppCompatActivity() {
                         db.collection("post")
                             .document(post.postId!!)
                             .collection("comments")
-                            .orderBy("date", com.google.firebase.firestore.Query.Direction.DESCENDING)
+                            .orderBy(
+                                "date",
+                                com.google.firebase.firestore.Query.Direction.DESCENDING
+                            )
                             .addSnapshotListener { commentSnapshot, commentException ->
                                 if (commentException != null) {
-                                    Toast.makeText(this, "Error al cargar comentarios", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        this,
+                                        "Error al cargar comentarios",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     return@addSnapshotListener
                                 }
 
                                 // Limpiar los comentarios actuales
-                                post.comments = mutableListOf() // Asegúrate de que la lista sea mutable
+                                post.comments =
+                                    mutableListOf() // Asegúrate de que la lista sea mutable
 
                                 // Agregar comentarios nuevos
                                 commentSnapshot?.documents?.forEach { commentDocument ->
@@ -99,7 +107,6 @@ class displayfeed : AppCompatActivity() {
                 // Notificar al adaptador que los datos de publicaciones han cambiado
                 postAdapter.notifyDataSetChanged()
             }
-
 
 
         val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
@@ -121,111 +128,11 @@ class displayfeed : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val postContent = findViewById<EditText>(R.id.textcomment)
-        val mediaUpload = findViewById<Button>(R.id.mediaUpload)
-        val submitButton = findViewById<Button>(R.id.comentarbt)
-
-        mediaUpload.setOnClickListener {
-            openFilePicker()  // Abre el selector de archivos para elegir una imagen
+        val btadd: ImageButton = findViewById(R.id.boton_agregar)
+        btadd.setOnClickListener {
+            val intent = Intent(this, EspacioPubli::class.java)
+            startActivity(intent)
         }
-
-        submitButton.setOnClickListener {
-            val user = auth.currentUser
-            if (user == null) {
-                Toast.makeText(this, "Debes iniciar sesión", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val content = postContent.text.toString()
-            var mediaUrl: String? = null
-
-            if (selectedFileUri != null) {
-                val storageRef = storage.reference.child("posts/${user.uid}/${selectedFileUri?.lastPathSegment}")
-                val uploadTask = storageRef.putFile(selectedFileUri!!)  // Usa la URI directamente aquí
-                uploadTask.addOnSuccessListener {
-                    storageRef.downloadUrl.addOnSuccessListener { uri ->
-                        mediaUrl = uri.toString()
-                        savePost(content, mediaUrl)
-                    }
-                }.addOnFailureListener {
-                    Toast.makeText(this, "Error al subir archivo", Toast.LENGTH_SHORT).show()
-                }
-            } else {
-                savePost(content, mediaUrl)
-            }
-        }
-    }
-
-    private fun savePost(content: String, mediaUrl: String?) {
-        val postId = db.collection("post").document().id // Genera un ID único
-        val post = hashMapOf(
-            "username" to auth.currentUser?.email,
-            "date" to FieldValue.serverTimestamp(),
-            "post" to content,
-            "likes" to 0,
-            "likedBy" to emptyList<String>(),
-            "mediaURL" to mediaUrl,
-            "userId" to auth.currentUser?.uid
-        )
-
-        db.collection("post").add(post)
-            .addOnSuccessListener {
-                Toast.makeText(this, "Publicación exitosa en FB", Toast.LENGTH_SHORT).show()
-                //se sube a la base de datos de mysql
-
-                uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString(),postId)
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Error al publicar en FB", Toast.LENGTH_SHORT).show()
-            }
-    }
-
-    private val pickFileLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        if (uri != null) {
-            selectedFileUri = uri  // Almacena la URI seleccionada
-        }
-    }
-
-    fun openFilePicker() {
-        pickFileLauncher.launch("image/*")  // Limita la selección solo a imágenes
-    }
-    fun uploadpost(username : String, post : String, mediaURL : String, date: String,postId: String){
-        // Llamada a Retrofit para enviar la publicación
-        val postRequest = PostRequest(
-            username = username,
-            post = post,
-            mediaURL = mediaURL,  // URL de la imagen, si hay
-            date = date,
-            postId = postId
-
-        )
-
-        RetrofitClient.apiService.createPost(postRequest).enqueue(object : Callback<Map<String, Any>> {
-            override fun onResponse(
-                call: Call<Map<String, Any>>,
-                response: Response<Map<String, Any>>
-            ) {
-                if (response.isSuccessful) {
-                    val result = response.body()
-                    val success = result?.get("success") as? Boolean ?: false
-                    if (success) {
-                        Toast.makeText(this@displayfeed, "Publicación creada exitosamente en la base de datos", Toast.LENGTH_LONG).show()
-                    } else {
-                        val errorMessage = result?.get("error") as? String ?: "Error desconocido"
-                        Toast.makeText(this@displayfeed, "Error: $errorMessage", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    Toast.makeText(this@displayfeed, "Error en la respuesta del servidor", Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<Map<String, Any>>, t: Throwable) {
-                Toast.makeText(this@displayfeed, "Fallo en la conexión: ${t.message}", Toast.LENGTH_LONG).show()
-            }
-        })
-
-
-
 
 
     }
