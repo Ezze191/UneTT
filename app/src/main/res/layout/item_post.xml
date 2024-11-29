@@ -54,8 +54,8 @@
 
     <ImageView
         android:id="@+id/media_image"
-        android:layout_width="wrap_content"
-        android:layout_height="354dp"
+        android:layout_width="366dp"
+        android:layout_height="229dp"
         android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/foto_publicacion"
