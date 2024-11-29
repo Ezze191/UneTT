@@ -1,5 +1,4 @@
 package com.example.uttmovil
-
 import java.util.Locale
 import java.text.SimpleDateFormat
 import Post
@@ -17,7 +16,14 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlin.math.log
+import com.google.type.Date
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
+
+
 
 class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
@@ -71,16 +77,55 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         holder.likesCountTextView.text = post.likes.toString()
         val userID = FirebaseAuth.getInstance().currentUser?.uid
 
-        //manejar e; clic en el boton de like
+        //manejar el clic en el boton de like
         holder.likeButton.setOnClickListener {
             if(post.likedBy.contains(userID)){
                 post.likedBy.remove(userID)
                 post.likes--
                 holder.likesCountTextView.text = post.likes.toString()
+                //elimar like de la base de datos de mysql
+
+
             }else{
                 post.likedBy.add(userID!!)
                 post.likes++
                 holder.likesCountTextView.text = post.likes.toString()
+                //subir like a la base de datos de mysql
+                post.postId?.let { postId ->
+
+                    val likeRequest = RequestLike(
+                        postId = postId, // El ID del post, asegúrate de que está definido
+                        comentUser = FirebaseAuth.getInstance().currentUser?.email ?: "usuario desconocido",
+                        date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
+                            java.util.Date()
+                        ) // Formato compatible con MySQL
+                    )
+                    //llama a retrofit
+                    RetrofitClient.apiService.insertarLike(likeRequest).enqueue(object : Callback<Map<String, Any>> {
+                        override fun onResponse(
+                            call: Call<Map<String, Any>>,
+                            response: Response<Map<String, Any>>
+                        ) {
+                            if (response.isSuccessful) {
+                                val result = response.body()
+                                val success = result?.get("success") as? Boolean ?: false
+                                if (success) {
+                                    Toast.makeText(holder.itemView.context, "Like guardado correctamente en MySQL", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    val errorMessage = result?.get("message") as? String ?: "Error desconocido"
+                                    Toast.makeText(holder.itemView.context, "Error en MySQL: $errorMessage", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(holder.itemView.context, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Map<String, Any>>, t: Throwable) {
+                            Toast.makeText(holder.itemView.context, "Fallo en la conexión: ${t.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
+                }?: println("FirestoreError postId is null, cannot update Firestore.")
+
             }
             //actualizar la publicacion en la base de datos de firebase
             post.postId?.let { postId ->
@@ -89,6 +134,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                     .addOnSuccessListener {
                         // Actualización exitosa
                         println("Likes actualizados correctamente")
+
                     }
                     .addOnFailureListener { e ->
                         // Manejar errores de actualización
@@ -137,6 +183,36 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                         .addOnFailureListener{e ->
                             Toast.makeText(holder.itemView.context, "Error al agregar el comentario" + e.message, Toast.LENGTH_SHORT).show()
                         }
+                    //subir a comentario a la base de datos de mysql
+                    val comentarioRequest = ComentarioRequest(
+                        comentario = commentText,
+                        comentUser = FirebaseAuth.getInstance().currentUser?.email ?: "usuario desconocido",
+                        comentPost = postid ?: "id desconocido"
+                    )
+                    //llama a retrofit
+                    RetrofitClient.apiService.insertarComentario(comentarioRequest).enqueue(object : Callback<Map<String, Any>> {
+                        override fun onResponse(
+                            call: Call<Map<String, Any>>,
+                            response: Response<Map<String, Any>>
+                        ) {
+                            if (response.isSuccessful) {
+                                val result = response.body()
+                                val success = result?.get("success") as? Boolean ?: false
+                                if (success) {
+                                    Toast.makeText(holder.itemView.context, "Comentario agregado en MySQL", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    val errorMessage = result?.get("message") as? String ?: "Error desconocido"
+                                    Toast.makeText(holder.itemView.context, "Error en MySQL: $errorMessage", Toast.LENGTH_SHORT).show()
+                                }
+                            } else {
+                                Toast.makeText(holder.itemView.context, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Map<String, Any>>, t: Throwable) {
+                            Toast.makeText(holder.itemView.context, "Fallo en la conexión: ${t.message}", Toast.LENGTH_SHORT).show()
+                        }
+                    })
 
                 }
             }
@@ -162,6 +238,40 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                                 Toast.makeText(holder.itemView.context, "Publicación eliminada", Toast.LENGTH_SHORT).show()
                                 (posts as MutableList).removeAt(position)
                                 notifyItemRemoved(position)
+
+                                    //aqui se va a eliminar de la base de datos de mysql
+                                    val deletePostRequest = DeletePostRequest(
+                                        idFB = postId  // Aquí pones el ID de la publicación que quieres eliminar
+                                    )
+                                    // Llamada a Retrofit para hacer el POST al archivo PHP
+                                    RetrofitClient.apiService.deletePost(deletePostRequest).enqueue(object : Callback<Map<String, Any>> {
+                                        override fun onResponse(call: Call<Map<String, Any>>, response: Response<Map<String, Any>>) {
+                                            if (response.isSuccessful) {
+                                                val result = response.body()
+                                                val success = result?.get("success") as? Boolean ?: false
+                                                if (success) {
+                                                    // Muestra un mensaje de éxito
+                                                    Toast.makeText(holder.itemView.context, "Publicación eliminada correctamente de mysql", Toast.LENGTH_SHORT).show()
+                                                } else {
+                                                    // Muestra el mensaje de error desde la respuesta
+                                                    val errorMessage = result?.get("message") as? String ?: "Error desconocido"
+                                                    Toast.makeText(holder.itemView.context, "Error al eliminar: $errorMessage", Toast.LENGTH_SHORT).show()
+                                                }
+                                            } else {
+                                                // Manejo de errores en caso de que la respuesta no sea exitosa
+                                                Toast.makeText(holder.itemView.context, "Error en la respuesta del servidor", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<Map<String, Any>>, t: Throwable) {
+                                            // Manejo de fallos en la conexión
+                                            Toast.makeText(holder.itemView.context, "Error de conexión: ${t.message}", Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
+
+
+
+
                             }
                             .addOnFailureListener { e ->
                                 Toast.makeText(holder.itemView.context, "Error al eliminar: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -176,4 +286,6 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
     override fun getItemCount(): Int {
         return posts.size
     }
+
+
 }

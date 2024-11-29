@@ -1,11 +1,10 @@
 package com.example.uttmovil
-import android.hardware.camera2.CameraExtensionSession.StillCaptureLatency
 import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
     @FormUrlEncoded
-    @POST("api.php") // Asegúrate de que la URL corresponda al lugar donde subes tu archivo PHP
+    @POST("insert_usuario.php") // Asegúrate de que la URL corresponda al lugar donde subes tu archivo PHP
     fun insertUser(
         @Field("email") email: String,
         @Field("username") username: String,
@@ -33,5 +32,18 @@ interface ApiService {
         @Body postRequest: PostRequest  // Asegúrate de que el modelo tenga las variables correctas
     ): Call<Map<String, Any>>
 
+    //subir comentario a la base de datos
+    @POST("savecoment.php")  // Asegúrate de que la URL corresponda al archivo PHP correcto
+    fun insertarComentario(
+        @Body comentario: ComentarioRequest // Asegúrate de que el modelo tenga las variables correctas
+    ): Call<Map<String, Any>>
+
+    //subir like a la base de datos
+    @POST("savelike.php")  // Asegúrate de que la URL corresponda al archivo PHP correcto
+    fun insertarLike(@Body likeRequest: RequestLike): Call<Map<String, Any>>
+
+    //eliminar publicacion de la base de datos
+    @POST("eliminar_publicacion.php")  // Cambia esto por la URL correcta en tu servidor
+    fun deletePost(@Body request: DeletePostRequest): Call<Map<String, Any>>
 
 }

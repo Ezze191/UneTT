@@ -11,7 +11,8 @@ data class Post(
     var likes: Int = 0,
     var likedBy: MutableList<String> = mutableListOf(),
     var comments: MutableList<Comment> = mutableListOf() ,// Cambié esto para que sea mutable
-    val userId: String? = null
+    val userId: String? = null,
+
 )
 
 data class Comment(

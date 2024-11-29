@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -156,6 +157,7 @@ class displayfeed : AppCompatActivity() {
     }
 
     private fun savePost(content: String, mediaUrl: String?) {
+        val postId = db.collection("post").document().id // Genera un ID único
         val post = hashMapOf(
             "username" to auth.currentUser?.email,
             "date" to FieldValue.serverTimestamp(),
@@ -170,7 +172,8 @@ class displayfeed : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Publicación exitosa en FB", Toast.LENGTH_SHORT).show()
                 //se sube a la base de datos de mysql
-                uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString())
+
+                uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString(),postId)
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Error al publicar en FB", Toast.LENGTH_SHORT).show()
@@ -186,13 +189,15 @@ class displayfeed : AppCompatActivity() {
     fun openFilePicker() {
         pickFileLauncher.launch("image/*")  // Limita la selección solo a imágenes
     }
-    fun uploadpost(username : String, post : String, mediaURL : String, date: String){
+    fun uploadpost(username : String, post : String, mediaURL : String, date: String,postId: String){
         // Llamada a Retrofit para enviar la publicación
         val postRequest = PostRequest(
             username = username,
             post = post,
             mediaURL = mediaURL,  // URL de la imagen, si hay
-            date = date
+            date = date,
+            postId = postId
+
         )
 
         RetrofitClient.apiService.createPost(postRequest).enqueue(object : Callback<Map<String, Any>> {
@@ -218,6 +223,10 @@ class displayfeed : AppCompatActivity() {
                 Toast.makeText(this@displayfeed, "Fallo en la conexión: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
+
+
+
+
 
     }
 }
