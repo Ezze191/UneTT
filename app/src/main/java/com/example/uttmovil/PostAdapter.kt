@@ -2,6 +2,7 @@ package com.example.uttmovil
 import java.util.Locale
 import java.text.SimpleDateFormat
 import Post
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,7 +83,10 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         //dar click al nombre de una publicacion y que te mande a su perfil
         post.postId?.let { postId ->
             holder.nameTextView.setOnClickListener {
-                val email = post.username
+                val email = post.username  // 'post.username' contiene el username del post
+                val intent = Intent(holder.itemView.context, VerOtroPerfil::class.java)
+                intent.putExtra("email", email)  // Pasa el 'username' como un extra
+                holder.itemView.context.startActivity(intent)
             }
 
 
