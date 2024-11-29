@@ -3,6 +3,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 data class Post(
+    val name: String? = null,
     val username: String? = null,
     val date: Timestamp? = null,
     val post: String? = null,

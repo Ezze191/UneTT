@@ -28,6 +28,7 @@ import retrofit2.Response
 class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val nameTextView: TextView = itemView.findViewById(R.id.name)
         val usernameTextView: TextView = itemView.findViewById(R.id.username)
         val postTextView: TextView = itemView.findViewById(R.id.post_content)
         val postImageView: ImageView = itemView.findViewById(R.id.media_image)  // ImageView para la imagen
@@ -47,6 +48,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
+        holder.nameTextView.text = post.name
         holder.usernameTextView.text = post.username
         holder.postTextView.text = post.post
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid //para ver el id del usuario
@@ -77,6 +79,16 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         holder.likesCountTextView.text = post.likes.toString()
         val userID = FirebaseAuth.getInstance().currentUser?.uid
 
+        //dar click al nombre de una publicacion y que te mande a su perfil
+        post.postId?.let { postId ->
+            holder.nameTextView.setOnClickListener {
+                val email = post.username
+            }
+
+
+        }?: println("FirestoreError postId is null, cannot update Firestore.")
+
+
         //manejar el clic en el boton de like
         holder.likeButton.setOnClickListener {
             if(post.likedBy.contains(userID)){
@@ -100,6 +112,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                             java.util.Date()
                         ) // Formato compatible con MySQL
                     )
+                    Toast.makeText(holder.itemView.context, post.username, Toast.LENGTH_SHORT).show()
                     //llama a retrofit
                     RetrofitClient.apiService.insertarLike(likeRequest).enqueue(object : Callback<Map<String, Any>> {
                         override fun onResponse(
@@ -148,7 +161,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         //manejar que se vean los comentarios aqui
         val commentText = buildString {
             post.comments.forEach { comment ->
-                append("${comment.username}\n")
+                append("${post.name}\n")
                 append("Fecha: ${comment.date?.toDate()?.toString() ?: "Desconocida"}):\n")
                 append("\n")
                 append("${comment.comment}\n")

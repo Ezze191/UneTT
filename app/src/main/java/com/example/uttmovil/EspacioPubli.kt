@@ -5,9 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,6 +29,10 @@ class EspacioPubli : AppCompatActivity() {
 
     var selectedFileUri: Uri? = null
 
+    var name = ""
+
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +48,9 @@ class EspacioPubli : AppCompatActivity() {
         val postContent = findViewById<EditText>(R.id.comenttext)
         val mediaUpload = findViewById<Button>(R.id.mediaUpload)
         val submitButton = findViewById<Button>(R.id.btcomentar)
+
+        val email = auth.currentUser?.email
+        obtenerDatosUsuario(email.toString())
 
 
 
@@ -75,10 +84,44 @@ class EspacioPubli : AppCompatActivity() {
             }
         }
     }
+    private fun obtenerDatosUsuario(email: String) {
+        val call = RetrofitClient.apiService.searchUser(email)
+        call.enqueue(object : retrofit2.Callback<String> {
+            override fun onResponse(call: Call<String>, response: retrofit2.Response<String>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()?.split("\n") ?: listOf()
+                    if (responseBody.size >= 3) {
+                        var userName = responseBody[0]
+                        val biografia = responseBody[1]
+                        val fecha = responseBody[2]
+
+                        name = userName
+
+
+
+
+                    } else {
+
+                    }
+                } else {
+
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+
+            }
+        })
+    }
+
+
+
 
     private fun savePost(content: String, mediaUrl: String?) {
+
         val postId = db.collection("post").document().id // Genera un ID único
         val post = hashMapOf(
+            "name" to name,
             "username" to auth.currentUser?.email,
             "date" to FieldValue.serverTimestamp(),
             "post" to content,
@@ -152,6 +195,8 @@ class EspacioPubli : AppCompatActivity() {
 
 
     }
+
+
 
 
 
