@@ -46,10 +46,9 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="409dp"
-        android:layout_height="715dp"
+        android:layout_width="411dp"
+        android:layout_height="733dp"
         android:layout_marginTop="75dp"
-        app:layout_constraintBottom_toBottomOf="@+id/barra_abajo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,178 +64,219 @@
             tools:context=".MainActivity">
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/espacio_perfil"
-                android:layout_width="405dp"
-                android:layout_height="721dp"
-                android:background="#A2E9E0E0"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/materialToolbar2"
+                android:layout_width="414dp"
+                android:layout_height="732dp"
+                android:background="#3FBD82"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0">
+                app:layout_constraintVertical_bias="1.0" />
 
+            <TextView
+                android:id="@+id/matriculatxt"
+                android:layout_width="127dp"
+                android:layout_height="30dp"
+                android:text="Matricula"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
+                app:layout_constraintHorizontal_bias="0.136"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/materialToolbar2"
+                app:layout_constraintVertical_bias="0.227" />
 
-                <TextView
-                    android:id="@+id/matriculatxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Matricula"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/matriculatext"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha de creacion"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.159"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.662" />
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="12dp"
-                    android:text="Fecha de creacion"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/fechaCreacion_txt"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.414"
-                    app:layout_constraintStart_toStartOf="parent" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correo"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.377" />
 
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Correo"
-                    android:textColor="@color/black"
-                    app:layout_constraintBottom_toTopOf="@+id/correotext"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/matriculatext"
-                    app:layout_constraintVertical_bias="0.48" />
+            <TextView
+                android:id="@+id/correotext"
+                android:layout_width="339dp"
+                android:layout_height="51dp"
+                android:editable="true"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Correo:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.43"
+                tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits" />
 
-                <TextView
-                    android:id="@+id/correotext"
-                    android:layout_width="302dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="92dp"
-                    android:editable="true"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:text="Correo:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/matriculatext"
-                    tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits" />
+            <TextView
+                android:id="@+id/fechaCreacion_txt"
+                android:layout_width="344dp"
+                android:layout_height="48dp"
+                android:editable="false"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Fecha de Creación:"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.722"
+                tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits" />
 
-                <TextView
-                    android:id="@+id/fechaCreacion_txt"
-                    android:layout_width="302dp"
-                    android:layout_height="48dp"
-                    android:editable="false"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:text="Fecha de Creación:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.951"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits"
-                    tools:layout_editor_absoluteY="509dp" />
+            <TextView
+                android:id="@+id/matriculatext"
+                android:layout_width="339dp"
+                android:layout_height="47dp"
+                android:layout_marginTop="188dp"
+                android:editable="false"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Matrícula:"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.547"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.002"
+                tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits,TouchTargetSizeCheck" />
 
-                <TextView
-                    android:id="@+id/matriculatext"
-                    android:layout_width="302dp"
-                    android:layout_height="48dp"
-                    android:editable="false"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:text="Matrícula:"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.718"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits"
-                    tools:layout_editor_absoluteY="244dp" />
-
-                <Button
-                    android:id="@+id/bt_aplicar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Aplicar
+            <Button
+                android:id="@+id/bt_aplicar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aplicar
 "
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="HardcodedText" />
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.483"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.963"
+                tools:ignore="HardcodedText" />
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Biografia"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.558"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/correotext" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Biografia"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.125"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.526" />
 
-                <TextView
-                    android:id="@+id/textuser"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Username"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.476"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="176dp" />
+            <TextView
+                android:id="@+id/textuser"
+                style="@android:style/Widget.DeviceDefault.Light.TextView.SpinnerItem"
+                android:layout_width="118dp"
+                android:layout_height="29dp"
+                android:text="Username"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.119"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/materialToolbar2"
+                app:layout_constraintVertical_bias="0.071" />
 
-                <TextView
-                    android:id="@+id/contratext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Contraseña"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.429"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="546dp" />
+            <TextView
+                android:id="@+id/contratext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contraseña"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.128"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.79" />
 
-                <EditText
-                    android:id="@+id/textname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:text="Name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="186dp" />
+            <EditText
+                android:id="@+id/textname"
+                android:layout_width="339dp"
+                android:layout_height="52dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Name"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.547"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.116" />
 
-                <EditText
-                    android:id="@+id/biografiatext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:text="Name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="417dp" />
+            <EditText
+                android:id="@+id/biografiatext"
+                android:layout_width="342dp"
+                android:layout_height="43dp"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Name"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.583"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.577"
+                tools:ignore="TouchTargetSizeCheck" />
 
-                <EditText
-                    android:id="@+id/passwordtext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPassword"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="574dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <EditText
+                android:id="@+id/passwordtext"
+                android:layout_width="346dp"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.617"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.853"
+                tools:ignore="SpeakableTextPresentCheck" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -246,9 +286,8 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar"
-        android:layout_width="409dp"
-        android:layout_height="95dp"
-        android:layout_marginBottom="4dp"
+        android:layout_width="417dp"
+        android:layout_height="89dp"
         android:background="#010201"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -256,9 +295,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="VisualLintBounds">
+        tools:ignore="MissingConstraints,VisualLintBounds">
 
         <!-- Primer botón (boton_inicio) -->
         <ImageButton

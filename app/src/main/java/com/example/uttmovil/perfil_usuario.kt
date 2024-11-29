@@ -1,4 +1,5 @@
 package com.example.uttmovil
+import android.animation.Animator
 import android.widget.Toast
 
 
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.airbnb.lottie.LottieAnimationView
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 
@@ -20,6 +22,7 @@ import retrofit2.Call
 class perfil_usuario : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_perfil_usuario)
@@ -32,6 +35,8 @@ class perfil_usuario : AppCompatActivity() {
         val currentUser = auth.currentUser
         val userEmail: String? = currentUser?.email
 
+
+
         //mando a llamar a la funcion para obtener los datos desde mysql
         obtenerDatosUsuario(userEmail.toString())
 
@@ -40,6 +45,7 @@ class perfil_usuario : AppCompatActivity() {
             val intent = Intent(this, displayfeed::class.java)
             startActivity(intent)
         }
+
 
         //encuentra el id del boton de cerrar session
         val bt_cerrar  = findViewById<ImageButton>(R.id.logOutBt)
@@ -55,12 +61,40 @@ class perfil_usuario : AppCompatActivity() {
 
         }
 
-        //boton de editar perfil
-        val bt_editar_perfil = findViewById<Button>(R.id.bt_editar_perfil)
-        bt_editar_perfil.setOnClickListener {
-            val intent = Intent(this, editarperfil::class.java)
-            startActivity(intent)
+
+
+
+        val lottieView = findViewById<LottieAnimationView>(R.id.lottie_view)
+
+        lottieView.setOnClickListener {
+            if (!lottieView.isAnimating) {
+                lottieView.playAnimation()
+
+                lottieView.addAnimatorListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(p0: Animator) {
+                        // No se necesita acción aquí
+                    }
+
+                    override fun onAnimationEnd(p0: Animator) {
+                        // Navegar a la otra pantalla
+                        val intent = Intent(this@perfil_usuario, editarperfil::class.java)
+                        startActivity(intent)
+
+                        // Elimina el listener para evitar múltiples llamadas
+                        lottieView.removeAnimatorListener(this)
+                    }
+
+                    override fun onAnimationCancel(p0: Animator) {
+                        // Sin acción necesaria al cancelar
+                    }
+
+                    override fun onAnimationRepeat(p0: Animator) {
+                        // Sin acción necesaria al repetir
+                    }
+                })
+            }
         }
+
 
 
 
