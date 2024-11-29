@@ -5,13 +5,18 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.uttmovil.RetrofitClient.apiService
+import com.google.android.gms.common.api.Response
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
+import retrofit2.Callback
 
 class editarperfil : AppCompatActivity() {
 
@@ -29,9 +34,6 @@ class editarperfil : AppCompatActivity() {
 
         //mando a llamar a la funcion para obtener los datos desde mysql
         obtenerDatosUsuario(userEmail.toString())
-
-
-
 
     }
     //metodo para obtener datos del usuario desde mysql
@@ -67,6 +69,70 @@ class editarperfil : AppCompatActivity() {
                         val textmatricula = findViewById<TextView>(R.id.matriculatext)
                         textmatricula.text = matricula.toString()
 
+                        //boton de editar perfil
+                        val bt_aplicar = findViewById<Button>(R.id.bt_aplicar)
+                        bt_aplicar.setOnClickListener {
+                            val username = findViewById<TextView>(R.id.textname).text.toString()
+                            val biografia = findViewById<TextView>(R.id.biografiatext).text.toString()
+                            val password = findViewById<TextView>(R.id.passwordtext).text.toString()
+
+                            // Llama al servicio Retrofit
+                            RetrofitClient.apiService.updateProfile(
+                                email,
+                                username,
+                                if (password.isBlank()) "" else password, // Envía "" si el password está vacío
+                                biografia
+                            ).enqueue(object : retrofit2.Callback<Void> {
+                                override fun onResponse(call: Call<Void>, response: retrofit2.Response<Void>) {
+                                    if (response.isSuccessful) {
+                                        //si pone nueva password actualizarla en firebase
+                                        if (password.isNotBlank()) {
+                                            actualizarPassword(
+                                                password,
+                                                onSuccess = {
+                                                    // Acción en caso de éxito
+                                                    val intent = Intent(this@editarperfil, perfil_usuario::class.java)
+                                                    startActivity(intent)
+                                                },
+                                                onError = { error ->
+                                                    // Acción en caso de error
+                                                    AlertDialog.Builder(this@editarperfil).apply {
+                                                        setTitle("Error")
+                                                        setMessage("Error al actualizar el perfil: ${error}")
+                                                        setPositiveButton("OK", null)
+                                                    }.show()
+
+                                                }
+                                            )
+                                        } else {
+                                            // Si no hay cambio de contraseña, solo guarda los otros datos
+                                            val intent = Intent(this@editarperfil, perfil_usuario::class.java)
+                                            startActivity(intent)
+                                        }
+
+
+                                    } else {
+                                        AlertDialog.Builder(this@editarperfil).apply {
+                                            setTitle("Error")
+                                            setMessage("Error al actualizar el perfil: ${response.message()}")
+                                            setPositiveButton("OK", null)
+                                        }.show()
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<Void>, t: Throwable) {
+                                    AlertDialog.Builder(this@editarperfil).apply {
+                                        setTitle("Error de conexión")
+                                        setMessage("No se pudo conectar con el servidor: ${t.message}")
+                                        setPositiveButton("OK", null)
+                                    }.show()
+                                }
+                            })
+
+
+
+                        }
+
 
                     } else {
                         AlertDialog.Builder(this@editarperfil).apply {
@@ -91,9 +157,59 @@ class editarperfil : AppCompatActivity() {
                     setPositiveButton("OK", null)
                 }.show()
             }
+
+
         })
     }
 
+    fun actualizarPassword(
+        nuevaPassword: String,
+        onSuccess: () -> Unit,
+        onError: (String) -> Unit
+    ) {
+        val user = FirebaseAuth.getInstance().currentUser
+
+        if (user != null) {
+            val userEmail = user.email
+            if (userEmail != null) {
+                // Solicitar al usuario su contraseña actual para la reautenticación
+                val currentPasswordField = findViewById<TextView>(R.id.currentPasswordText)
+                val currentPassword = currentPasswordField.text.toString()
+
+                if (currentPassword.isBlank()) {
+                    onError("Por favor, ingresa tu contraseña actual.")
+                    return
+                }
+
+                // Crear credenciales de reautenticación
+                val credential = EmailAuthProvider.getCredential(userEmail, currentPassword)
+
+                // Reautenticar al usuario
+                user.reauthenticate(credential)
+                    .addOnCompleteListener { reauthTask ->
+                        if (reauthTask.isSuccessful) {
+                            // Después de reautenticarse, actualizar la contraseña
+                            user.updatePassword(nuevaPassword)
+                                .addOnCompleteListener { updateTask ->
+                                    if (updateTask.isSuccessful) {
+                                        onSuccess()
+                                    } else {
+                                        val errorMessage = updateTask.exception?.message ?: "Error desconocido"
+                                        onError(errorMessage)
+                                    }
+                                }
+                        } else {
+                            val errorMessage = reauthTask.exception?.message ?: "Error al reautenticar"
+                            onError(errorMessage)
+                        }
+                    }
+            } else {
+                onError("No se encontró el correo electrónico del usuario.")
+            }
+        } else {
+            onError("No se encontró un usuario autenticado.")
+        }
+    }
+    }
 
 
-}

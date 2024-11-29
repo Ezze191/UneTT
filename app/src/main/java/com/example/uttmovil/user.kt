@@ -46,4 +46,14 @@ interface ApiService {
     @POST("eliminar_publicacion.php")  // Cambia esto por la URL correcta en tu servidor
     fun deletePost(@Body request: DeletePostRequest): Call<Map<String, Any>>
 
+    //actualizar datos del usuario
+    @FormUrlEncoded
+    @POST("updateProfile.php") // Cambia esto por la ruta correcta de tu archivo PHP
+    fun updateProfile(
+        @Field("correoelectronico") email: String,
+        @Field("username") username: String,
+        @Field("password") password: String?,
+        @Field("bio") bio: String?
+    ): Call<Void>
+
 }
