@@ -178,8 +178,7 @@
                 android:id="@+id/bt_aplicasr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Aplicar
-"
+                android:text="Aplicar"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.977"
@@ -365,9 +364,24 @@
                 android:layout_width="90dp"
                 android:layout_height="77dp"
                 android:backgroundTint="#00FFFFFF"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/home"
                 app:tint="@color/white"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/boton_agregar"
+                android:layout_width="90dp"
+                android:layout_height="77dp"
+                android:background="#00FFFFFF"
+                android:scaleType="center"
+                android:scaleX="1.5"
+                android:scaleY="1.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/boton_busqueda"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/plus"
+                app:tint="@color/black_opacity"
                 tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
             <!-- Cuarto botón (boton_user) -->
@@ -376,7 +390,9 @@
                 android:layout_width="90dp"
                 android:layout_height="80dp"
                 android:backgroundTint="#020202"
-                android:scaleType="centerCrop"
+                android:scaleType="centerInside"
+                android:scaleX="1"
+                android:scaleY="1"
                 app:srcCompat="@drawable/userr"
                 app:tint="#FBF8F8"
                 tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
