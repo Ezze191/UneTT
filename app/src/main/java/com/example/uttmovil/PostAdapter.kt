@@ -70,7 +70,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
         }
 
         post.date?.toDate()?.let {
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             holder.dateTextView.text = dateFormat.format(it)
         } ?: run {
             holder.dateTextView.text = "Fecha desconocida"
@@ -112,11 +112,10 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                     val likeRequest = RequestLike(
                         postId = postId, // El ID del post, asegúrate de que está definido
                         comentUser = FirebaseAuth.getInstance().currentUser?.email ?: "usuario desconocido",
-                        date = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(
+                        date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
                             java.util.Date()
                         ) // Formato compatible con MySQL
                     )
-                    Toast.makeText(holder.itemView.context, post.username, Toast.LENGTH_SHORT).show()
                     //llama a retrofit
                     RetrofitClient.apiService.insertarLike(likeRequest).enqueue(object : Callback<Map<String, Any>> {
                         override fun onResponse(
@@ -127,7 +126,6 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                                 val result = response.body()
                                 val success = result?.get("success") as? Boolean ?: false
                                 if (success) {
-                                    Toast.makeText(holder.itemView.context, "Like guardado correctamente en MySQL", Toast.LENGTH_SHORT).show()
                                 } else {
                                     val errorMessage = result?.get("message") as? String ?: "Error desconocido"
                                     Toast.makeText(holder.itemView.context, "Error en MySQL: $errorMessage", Toast.LENGTH_SHORT).show()
@@ -150,7 +148,6 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                 postRef.update("likedBy", post.likedBy, "likes", post.likes)
                     .addOnSuccessListener {
                         // Actualización exitosa
-                        println("Likes actualizados correctamente")
 
                     }
                     .addOnFailureListener { e ->
@@ -194,7 +191,6 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                         .collection("comments")
                         .add(comment)
                         .addOnSuccessListener {
-                            Toast.makeText(holder.itemView.context, "Comentario agregado", Toast.LENGTH_SHORT).show()
                             holder.commentEditText.text = ""
                         }
                         .addOnFailureListener{e ->
@@ -216,7 +212,6 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                                 val result = response.body()
                                 val success = result?.get("success") as? Boolean ?: false
                                 if (success) {
-                                    Toast.makeText(holder.itemView.context, "Comentario agregado en MySQL", Toast.LENGTH_SHORT).show()
                                 } else {
                                     val errorMessage = result?.get("message") as? String ?: "Error desconocido"
                                     Toast.makeText(holder.itemView.context, "Error en MySQL: $errorMessage", Toast.LENGTH_SHORT).show()
@@ -268,7 +263,6 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                                                 val success = result?.get("success") as? Boolean ?: false
                                                 if (success) {
                                                     // Muestra un mensaje de éxito
-                                                    Toast.makeText(holder.itemView.context, "Publicación eliminada correctamente de mysql", Toast.LENGTH_SHORT).show()
                                                 } else {
                                                     // Muestra el mensaje de error desde la respuesta
                                                     val errorMessage = result?.get("message") as? String ?: "Error desconocido"

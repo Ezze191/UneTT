@@ -133,7 +133,6 @@ class EspacioPubli : AppCompatActivity() {
 
         db.collection("post").add(post)
             .addOnSuccessListener {
-                Toast.makeText(this, "Publicación exitosa en FB", Toast.LENGTH_SHORT).show()
                 //se sube a la base de datos de mysql
 
                 uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString(),postId)
@@ -172,7 +171,6 @@ class EspacioPubli : AppCompatActivity() {
                     val result = response.body()
                     val success = result?.get("success") as? Boolean ?: false
                     if (success) {
-                        Toast.makeText(this@EspacioPubli, "Publicación creada exitosamente en la base de datos", Toast.LENGTH_LONG).show()
                         val Intent = Intent(this@EspacioPubli, displayfeed::class.java)
                         startActivity(Intent)
                         finish()

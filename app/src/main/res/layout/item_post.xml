@@ -17,13 +17,14 @@
         android:text="Eliminar"
         android:textColor="@color/white"
         tools:ignore="TouchTargetSizeCheck" />
+
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="8dp"
-        android:background="#16976f"
+        android:background="#5EAF91"
         android:text="name"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -36,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
         android:layout_marginTop="8dp"
-        android:background="#16976f"
+        android:background="#5EAF91"
         android:text="Username"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -49,8 +50,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="4dp"
+        android:background="#9416976F"
         android:text="Date"
-        android:background="#16976f"
         android:textColor="@color/black"
         android:textSize="20sp" />
 
@@ -60,10 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
         android:layout_marginEnd="3dp"
+        android:background="#5D16976F"
         android:text="Aquí va el texto de la publicación"
         android:textColor="#000"
         android:textSize="16sp"
-        android:background="#16976f"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +86,7 @@
         android:id="@+id/commentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#5EAF91"
         android:text="comentarios"
         android:textColor="@color/black" />
 
