@@ -166,7 +166,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
             ) // Formato compatible con MySQL
             post.comments.forEach { comment ->
                 append("${post.name}\n")
-                append("Fecha: ${date}):\n")
+                append("Fecha: ${date}\n")
                 append("\n")
                 append("${comment.comment}\n")
                 append("\n")
