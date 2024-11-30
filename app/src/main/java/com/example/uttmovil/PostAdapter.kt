@@ -161,9 +161,12 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
 
         //manejar que se vean los comentarios aqui
         val commentText = buildString {
+            val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+                java.util.Date()
+            ) // Formato compatible con MySQL
             post.comments.forEach { comment ->
                 append("${post.name}\n")
-                append("Fecha: ${comment.date?.toDate()?.toString() ?: "Desconocida"}):\n")
+                append("Fecha: ${date}):\n")
                 append("\n")
                 append("${comment.comment}\n")
                 append("\n")
