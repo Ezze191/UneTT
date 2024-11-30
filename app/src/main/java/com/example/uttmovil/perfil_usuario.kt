@@ -99,6 +99,7 @@ class perfil_usuario : AppCompatActivity() {
 
 
 
+
     }
     //metodo para obtener datos del usuario desde mysql
     private fun obtenerDatosUsuario(email: String) {

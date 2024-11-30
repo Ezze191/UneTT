@@ -175,7 +175,7 @@
                 tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits,TouchTargetSizeCheck" />
 
             <Button
-                android:id="@+id/bt_aplicasr"
+                android:id="@+id/falsodd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aplicar"

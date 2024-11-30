@@ -116,11 +116,7 @@ class displayfeed : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val seguidoresButton: ImageButton = findViewById(R.id.seguidores_button)
-        seguidoresButton.setOnClickListener {
-            val intent = Intent(this, display_seguidores::class.java)
-            startActivity(intent)
-        }
+
 
         val perfilUsuarioButton: ImageButton = findViewById(R.id.boton_user)
         perfilUsuarioButton.setOnClickListener {

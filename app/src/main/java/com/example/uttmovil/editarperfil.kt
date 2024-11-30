@@ -37,36 +37,10 @@ class editarperfil : AppCompatActivity() {
         //mando a llamar a la funcion para obtener los datos desde mysql
         obtenerDatosUsuario(userEmail.toString())
 
-        val lottieView = findViewById<LottieAnimationView>(R.id.bt_aplicar)
 
-        lottieView.setOnClickListener {
-            if (!lottieView.isAnimating) {
-                lottieView.playAnimation()
 
-                lottieView.addAnimatorListener(object : Animator.AnimatorListener {
-                    override fun onAnimationStart(p0: Animator) {
-                        // No se necesita acción aquí
-                    }
 
-                    override fun onAnimationEnd(p0: Animator) {
-                        // Navegar a la otra pantalla
-                        val intent = Intent(this@editarperfil, editarperfil::class.java)
-                        startActivity(intent)
 
-                        // Elimina el listener para evitar múltiples llamadas
-                        lottieView.removeAnimatorListener(this)
-                    }
-
-                    override fun onAnimationCancel(p0: Animator) {
-                        // Sin acción necesaria al cancelar
-                    }
-
-                    override fun onAnimationRepeat(p0: Animator) {
-                        // Sin acción necesaria al repetir
-                    }
-                })
-            }
-        }
 
     }
     //metodo para obtener datos del usuario desde mysql
@@ -103,7 +77,7 @@ class editarperfil : AppCompatActivity() {
                         textmatricula.text = matricula.toString()
 
                         //boton de editar perfil
-                        val bt_aplicar = findViewById<Button>(R.id.bt_aplicar)
+                        val bt_aplicar = findViewById<LottieAnimationView>(R.id.bt_aplicar)
                         bt_aplicar.setOnClickListener {
                             val username = findViewById<TextView>(R.id.textname).text.toString()
                             val biografia = findViewById<TextView>(R.id.biografiatext).text.toString()
@@ -139,8 +113,7 @@ class editarperfil : AppCompatActivity() {
                                             )
                                         } else {
                                             // Si no hay cambio de contraseña, solo guarda los otros datos
-                                            val intent = Intent(this@editarperfil, perfil_usuario::class.java)
-                                            startActivity(intent)
+
                                         }
 
 
@@ -161,6 +134,33 @@ class editarperfil : AppCompatActivity() {
                                     }.show()
                                 }
                             })
+
+                            if (!bt_aplicar.isAnimating) {
+                                bt_aplicar.playAnimation()
+
+                                bt_aplicar.addAnimatorListener(object : Animator.AnimatorListener {
+                                    override fun onAnimationStart(p0: Animator) {
+                                        // No se necesita acción aquí
+                                    }
+
+                                    override fun onAnimationEnd(p0: Animator) {
+                                        // Navegar a la otra pantalla
+                                        val intent = Intent(this@editarperfil, perfil_usuario::class.java)
+                                        startActivity(intent)
+
+                                        // Elimina el listener para evitar múltiples llamadas
+                                        bt_aplicar.removeAnimatorListener(this)
+                                    }
+
+                                    override fun onAnimationCancel(p0: Animator) {
+                                        // Sin acción necesaria al cancelar
+                                    }
+
+                                    override fun onAnimationRepeat(p0: Animator) {
+                                        // Sin acción necesaria al repetir
+                                    }
+                                })
+                            }
 
 
 

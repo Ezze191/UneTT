@@ -273,7 +273,7 @@
                 android:scaleX="1.5"
                 android:scaleY="1.5"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/boton_busqueda"
+
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/plus"
                 app:tint="@color/black_opacity"
