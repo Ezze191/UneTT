@@ -26,8 +26,10 @@
         android:layout_marginTop="8dp"
         android:background="#5EAF91"
         android:text="name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000000"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +42,9 @@
         android:background="#5EAF91"
         android:text="Username"
         android:textColor="#000000"
+        android:textColorHighlight="#0F0C0C"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,7 +56,7 @@
         android:layout_marginEnd="4dp"
         android:background="#9416976F"
         android:text="Date"
-        android:textColor="@color/black"
+        android:textColor="@android:color/system_accent2_600"
         android:textSize="20sp" />
 
     <TextView
@@ -63,6 +67,7 @@
         android:layout_marginEnd="3dp"
         android:background="#5D16976F"
         android:text="Aquí va el texto de la publicación"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
