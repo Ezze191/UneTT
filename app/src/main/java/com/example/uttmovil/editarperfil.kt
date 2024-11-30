@@ -1,5 +1,6 @@
 package com.example.uttmovil
 
+import android.animation.Animator
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.airbnb.lottie.LottieAnimationView
 import com.example.uttmovil.RetrofitClient.apiService
 import com.google.android.gms.common.api.Response
 import com.google.firebase.auth.EmailAuthProvider
@@ -34,6 +36,37 @@ class editarperfil : AppCompatActivity() {
 
         //mando a llamar a la funcion para obtener los datos desde mysql
         obtenerDatosUsuario(userEmail.toString())
+
+        val lottieView = findViewById<LottieAnimationView>(R.id.bt_aplicar)
+
+        lottieView.setOnClickListener {
+            if (!lottieView.isAnimating) {
+                lottieView.playAnimation()
+
+                lottieView.addAnimatorListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(p0: Animator) {
+                        // No se necesita acción aquí
+                    }
+
+                    override fun onAnimationEnd(p0: Animator) {
+                        // Navegar a la otra pantalla
+                        val intent = Intent(this@editarperfil, editarperfil::class.java)
+                        startActivity(intent)
+
+                        // Elimina el listener para evitar múltiples llamadas
+                        lottieView.removeAnimatorListener(this)
+                    }
+
+                    override fun onAnimationCancel(p0: Animator) {
+                        // Sin acción necesaria al cancelar
+                    }
+
+                    override fun onAnimationRepeat(p0: Animator) {
+                        // Sin acción necesaria al repetir
+                    }
+                })
+            }
+        }
 
     }
     //metodo para obtener datos del usuario desde mysql
