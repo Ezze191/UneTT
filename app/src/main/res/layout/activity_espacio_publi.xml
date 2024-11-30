@@ -150,8 +150,8 @@
     </com.google.android.material.appbar.MaterialToolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="444dp"
+        android:layout_height="138dp"
         android:layout_marginTop="248dp"
         app:layout_constraintBottom_toTopOf="@+id/materialToolbar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -168,11 +168,14 @@
             android:id="@+id/btcomentar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="12dp"
+            android:backgroundTint="#2196F3"
             android:text="Publicar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.886"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.822"
             tools:ignore="HardcodedText" />
 
         <EditText
@@ -184,10 +187,10 @@
             android:inputType="text"
             app:layout_constraintBottom_toTopOf="@+id/mediaUpload"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.083"
+            app:layout_constraintHorizontal_bias="0.068"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.804"
+            app:layout_constraintVertical_bias="0.551"
             tools:ignore="Autofill,HardcodedText,MissingConstraints,TouchTargetSizeCheck" />
 
         <Button
@@ -195,13 +198,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#8E8D8D"
             android:text="Subir Media"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btcomentar"
-            app:layout_constraintHorizontal_bias="0.116"
+            app:layout_constraintHorizontal_bias="0.032"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/deleteFileButton"
+            android:layout_width="152dp"
+            android:layout_height="41dp"
+            android:text="Eliminar archivo"
+            android:backgroundTint="#E71919"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btcomentar"
+            app:layout_constraintHorizontal_bias="0.34"
+            app:layout_constraintStart_toEndOf="@+id/mediaUpload"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.835"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <TextView
+            android:id="@+id/fileNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No file selected"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/comenttext"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.26" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

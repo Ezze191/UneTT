@@ -1,15 +1,18 @@
 package com.example.uttmovil
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -31,10 +34,6 @@ class EspacioPubli : AppCompatActivity() {
 
     var name = ""
 
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -44,15 +43,56 @@ class EspacioPubli : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //botones de barra inferior de navegacion
+        val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
+        bt_inicio.setOnClickListener {
+            val intent = Intent(this, displayfeed::class.java)
+            startActivity(intent)
+
+        }
+
+        val perfilUsuarioButton: ImageButton = findViewById(R.id.boton_user)
+        perfilUsuarioButton.setOnClickListener {
+            val intent = Intent(this, perfil_usuario::class.java)
+            startActivity(intent)
+
+        }
+
+        val btadd: ImageButton = findViewById(R.id.boton_agregar)
+        btadd.setOnClickListener {
+            val intent = Intent(this, EspacioPubli::class.java)
+            startActivity(intent)
+
+        }
+        val verperfil = findViewById<ImageButton>(R.id.boton_user)
+        verperfil.setOnClickListener {
+            val intent = Intent(this, perfil_usuario::class.java)
+            startActivity(intent)
+
+        }
+        val logout = findViewById<ImageButton>(R.id.logOutBt)
+        logout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            //redirijir al la pantalla de inicio
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         val postContent = findViewById<EditText>(R.id.comenttext)
         val mediaUpload = findViewById<Button>(R.id.mediaUpload)
         val submitButton = findViewById<Button>(R.id.btcomentar)
+        val deleteFileButton = findViewById<Button>(R.id.deleteFileButton)
+        val fileNameTextView = findViewById<TextView>(R.id.fileNameTextView)
 
         val email = auth.currentUser?.email
         obtenerDatosUsuario(email.toString())
 
-
+        deleteFileButton.setOnClickListener {
+            selectedFileUri = null
+            fileNameTextView.text = "No file selected"
+            Toast.makeText(this, "Archivo eliminado. Puedes seleccionar otro.", Toast.LENGTH_SHORT).show()
+        }
 
         mediaUpload.setOnClickListener {
             openFilePicker()  // Abre el selector de archivos para elegir una imagen
@@ -84,6 +124,7 @@ class EspacioPubli : AppCompatActivity() {
             }
         }
     }
+
     private fun obtenerDatosUsuario(email: String) {
         val call = RetrofitClient.apiService.searchUser(email)
         call.enqueue(object : retrofit2.Callback<String> {
@@ -96,29 +137,17 @@ class EspacioPubli : AppCompatActivity() {
                         val fecha = responseBody[2]
 
                         name = userName
-
-
-
-
-                    } else {
-
                     }
-                } else {
-
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-
+                // Manejo de errores
             }
         })
     }
 
-
-
-
     private fun savePost(content: String, mediaUrl: String?) {
-
         val postId = db.collection("post").document().id // Genera un ID único
         val post = hashMapOf(
             "name" to name,
@@ -134,8 +163,7 @@ class EspacioPubli : AppCompatActivity() {
         db.collection("post").add(post)
             .addOnSuccessListener {
                 //se sube a la base de datos de mysql
-
-                uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString(),postId)
+                uploadpost(auth.currentUser?.email.toString(), content, mediaUrl.toString(), FieldValue.serverTimestamp().toString(), postId)
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Error al publicar en FB", Toast.LENGTH_SHORT).show()
@@ -143,15 +171,31 @@ class EspacioPubli : AppCompatActivity() {
     }
 
     private val pickFileLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        val fileNameTextView = findViewById<TextView>(R.id.fileNameTextView)
         if (uri != null) {
             selectedFileUri = uri  // Almacena la URI seleccionada
+            val fileName = getFileName(uri)  // Obtiene el nombre del archivo
+            fileNameTextView.text = fileName  // Actualiza el TextView con el nombre del archivo
         }
+    }
+
+    @SuppressLint("Range")
+    private fun getFileName(uri: Uri): String {
+        var fileName = "Unknown"
+        val cursor: Cursor? = contentResolver.query(uri, null, null, null, null)
+        cursor?.use {
+            if (it.moveToFirst()) {
+                fileName = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+            }
+        }
+        return fileName
     }
 
     fun openFilePicker() {
         pickFileLauncher.launch("image/*")  // Limita la selección solo a imágenes
     }
-    fun uploadpost(username : String, post : String, mediaURL : String, date: String,postId: String){
+
+    fun uploadpost(username: String, post: String, mediaURL: String, date: String, postId: String) {
         // Llamada a Retrofit para enviar la publicación
         val postRequest = PostRequest(
             username = username,
@@ -159,20 +203,16 @@ class EspacioPubli : AppCompatActivity() {
             mediaURL = mediaURL,  // URL de la imagen, si hay
             date = date,
             postId = postId
-
         )
 
         RetrofitClient.apiService.createPost(postRequest).enqueue(object : Callback<Map<String, Any>> {
-            override fun onResponse(
-                call: Call<Map<String, Any>>,
-                response: Response<Map<String, Any>>
-            ) {
+            override fun onResponse(call: Call<Map<String, Any>>, response: Response<Map<String, Any>>) {
                 if (response.isSuccessful) {
                     val result = response.body()
                     val success = result?.get("success") as? Boolean ?: false
                     if (success) {
-                        val Intent = Intent(this@EspacioPubli, displayfeed::class.java)
-                        startActivity(Intent)
+                        val intent = Intent(this@EspacioPubli, displayfeed::class.java)
+                        startActivity(intent)
                         finish()
                     } else {
                         val errorMessage = result?.get("error") as? String ?: "Error desconocido"
@@ -187,17 +227,5 @@ class EspacioPubli : AppCompatActivity() {
                 Toast.makeText(this@EspacioPubli, "Fallo en la conexión: ${t.message}", Toast.LENGTH_LONG).show()
             }
         })
-
-
-
-
-
     }
-
-
-
-
-
-
-
-    }
+}

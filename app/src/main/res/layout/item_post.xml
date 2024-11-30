@@ -1,202 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="#23C895"
     android:padding="16dp">
 
-    <!-- Botón Eliminar -->
-
-    <!-- Nombre -->
-
-    <!-- Username -->
-
-    <!-- Fecha -->
-
-    <!-- Contenido de la publicación -->
 
     <Button
         android:id="@+id/btdelete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="37dp"
         android:backgroundTint="#E71919"
         android:text="Eliminar"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         tools:ignore="TouchTargetSizeCheck" />
-
-    <!-- Imagen -->
-
-    <!-- Likes y comentarios -->
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="195dp"
-        android:layout_height="23dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="8dp"
         android:background="#5EAF91"
         android:text="name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/username"
-        android:layout_width="192dp"
-        android:layout_height="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="8dp"
         android:background="#5EAF91"
         android:text="Username"
         android:textColor="#000000"
-        android:textSize="16sp"
+        android:textColorHighlight="#0F0C0C"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/post_date"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="#9416976F"
         android:text="Date"
-        android:textColor="#5E666A"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.831"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114"
-        tools:ignore="TextContrastCheck" />
+        android:textColor="@android:color/system_accent2_600"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/post_content"
-        android:layout_width="379dp"
+        android:layout_width="371dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="3dp"
         android:background="#5D16976F"
-        android:padding="8dp"
         android:text="Aquí va el texto de la publicación"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204" />
-
-    <!-- Botón de like -->
-
-    <!-- Caja de comentarios -->
-
-    <!-- Botón comentar -->
+        tools:layout_editor_absoluteY="50dp" />
 
     <ImageView
         android:id="@+id/media_image"
-        android:layout_width="379dp"
-        android:layout_height="200dp"
+        android:layout_width="366dp"
+        android:layout_height="229dp"
+        android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/foto_publicacion"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.417" />
+        android:background="#16976f"
+        app:layout_constraintTop_toBottomOf="@+id/post_content" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661">
-
-        <TextView
-            android:id="@+id/commentText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Comentarios"
-            android:textColor="@color/black" />
-
-
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/like_button"
+    <TextView
+        android:id="@+id/commentText"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:backgroundTint="@android:color/transparent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/like"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.74"
-        tools:ignore="SpeakableTextPresentCheck" />
+        android:layout_height="wrap_content"
+        android:background="#5EAF91"
+        android:text="comentarios"
+        android:textColor="@color/black" />
 
     <TextView
         android:id="@+id/likes_count"
-        android:layout_width="41dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="0"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/like_button"
+        android:layout_width="58dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@android:color/transparent"
+        android:soundEffectsEnabled="false"
+        android:src="@drawable/like"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.748" />
+        app:layout_constraintTop_toBottomOf="@+id/media_image"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/commentEditText"
-        android:layout_width="379dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="Escribe un comentario..."
         android:inputType="text"
-        android:minHeight="48dp"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87" />
+        tools:ignore="TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/commentButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="37dp"
         android:backgroundTint="#2196F3"
-        android:text="Comentar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints,TouchTargetSizeCheck"
-        tools:layout_editor_absoluteY="485dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:text="comentar"
+        tools:ignore="TouchTargetSizeCheck" />
+
+
+</LinearLayout>

@@ -1,12 +1,15 @@
 package com.example.uttmovil
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
 
 class VerOtroPerfil : AppCompatActivity() {
@@ -21,6 +24,44 @@ class VerOtroPerfil : AppCompatActivity() {
         }
         val email = intent.getStringExtra("email")  // Obtén el valor de 'username' que se pasó
         obtenerDatosUsuario(email ?: "")
+
+        //botones de barra inferior de navegacion
+        val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
+        bt_inicio.setOnClickListener {
+            val intent = Intent(this, displayfeed::class.java)
+            startActivity(intent)
+
+        }
+
+        val perfilUsuarioButton: ImageButton = findViewById(R.id.boton_user)
+        perfilUsuarioButton.setOnClickListener {
+            val intent = Intent(this, perfil_usuario::class.java)
+            startActivity(intent)
+
+        }
+
+        val btadd: ImageButton = findViewById(R.id.boton_agregar)
+        btadd.setOnClickListener {
+            val intent = Intent(this, EspacioPubli::class.java)
+            startActivity(intent)
+
+        }
+        val verperfil = findViewById<ImageButton>(R.id.boton_user)
+        verperfil.setOnClickListener {
+            val intent = Intent(this, perfil_usuario::class.java)
+            startActivity(intent)
+
+        }
+        val logout = findViewById<ImageButton>(R.id.logOutBt)
+        logout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            //redirijir al la pantalla de inicio
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+
     }
 
 

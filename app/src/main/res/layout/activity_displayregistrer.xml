@@ -97,16 +97,20 @@
         app:layout_constraintTop_toTopOf="@+id/registercontainer"
         app:layout_constraintVertical_bias="0.7"
         tools:ignore="HardcodedText" />
+
     <Button
-            android:text="Registrar"
-            android:backgroundTint="#F85959"
-            android:layout_width="135sp"
-            android:layout_height="56dp" android:id="@+id/btregister"
-            app:layout_constraintTop_toTopOf="@+id/registercontainer"
-            app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
-            app:layout_constraintEnd_toEndOf="@+id/registercontainer"
-            app:layout_constraintStart_toStartOf="@+id/registercontainer" app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintVertical_bias="0.972" tools:ignore="HardcodedText,TextContrastCheck"/>
+        android:id="@+id/btregister"
+        android:layout_width="151dp"
+        android:layout_height="62dp"
+        android:backgroundTint="#F85959"
+        android:text="Registrar"
+        app:layout_constraintBottom_toBottomOf="@+id/registercontainer"
+        app:layout_constraintEnd_toEndOf="@+id/registercontainer"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="@+id/registercontainer"
+        app:layout_constraintTop_toTopOf="@+id/registercontainer"
+        app:layout_constraintVertical_bias="0.972"
+        tools:ignore="HardcodedText,TextContrastCheck" />
 
     <EditText
         android:id="@+id/inputemail"

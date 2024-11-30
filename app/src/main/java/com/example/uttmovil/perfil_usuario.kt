@@ -35,32 +35,44 @@ class perfil_usuario : AppCompatActivity() {
         val currentUser = auth.currentUser
         val userEmail: String? = currentUser?.email
 
-
-
-        //mando a llamar a la funcion para obtener los datos desde mysql
         obtenerDatosUsuario(userEmail.toString())
 
+
+        //botones de barra inferior de navegacion
         val bt_inicio = findViewById<ImageButton>(R.id.boton_inicio)
         bt_inicio.setOnClickListener {
             val intent = Intent(this, displayfeed::class.java)
             startActivity(intent)
+
         }
 
+        val perfilUsuarioButton: ImageButton = findViewById(R.id.boton_user)
+        perfilUsuarioButton.setOnClickListener {
+            val intent = Intent(this, perfil_usuario::class.java)
+            startActivity(intent)
 
-        //encuentra el id del boton de cerrar session
-        val bt_cerrar  = findViewById<ImageButton>(R.id.logOutBt)
+        }
 
-        bt_cerrar.setOnClickListener {
+        val btadd: ImageButton = findViewById(R.id.boton_agregar)
+        btadd.setOnClickListener {
+            val intent = Intent(this, EspacioPubli::class.java)
+            startActivity(intent)
+
+        }
+        val verperfil = findViewById<ImageButton>(R.id.boton_user)
+        verperfil.setOnClickListener {
+            val intent = Intent(this, perfil_usuario::class.java)
+            startActivity(intent)
+
+        }
+        val logout = findViewById<ImageButton>(R.id.logOutBt)
+        logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             //redirijir al la pantalla de inicio
-
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
-
-
         }
-
 
 
 
