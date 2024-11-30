@@ -170,11 +170,11 @@
             android:id="@+id/mediaUpload"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="144dp"
             android:layout_marginBottom="16dp"
             android:text="Subir Media"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/comentarbt"
+            app:layout_constraintEnd_toStartOf="@+id/btcomentar"
             tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

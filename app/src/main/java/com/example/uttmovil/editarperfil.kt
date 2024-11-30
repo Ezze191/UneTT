@@ -17,12 +17,9 @@ import com.google.android.gms.common.api.Response
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.Call
-<<<<<<< HEAD
-import retrofit2.Callback
-=======
-import com.airbnb.lottie.LottieAnimationView
 
->>>>>>> 9e57c53 (se cambio de layout el submit)
+import retrofit2.Callback
+import com.airbnb.lottie.LottieAnimationView
 
 class editarperfil : AppCompatActivity() {
 
@@ -41,8 +38,7 @@ class editarperfil : AppCompatActivity() {
         //mando a llamar a la funcion para obtener los datos desde mysql
         obtenerDatosUsuario(userEmail.toString())
 
-<<<<<<< HEAD
-=======
+
         val lottieView = findViewById<LottieAnimationView>(R.id.bt_aplicar)
 
         lottieView.setOnClickListener {
@@ -75,7 +71,6 @@ class editarperfil : AppCompatActivity() {
         }
 
 
->>>>>>> 9e57c53 (se cambio de layout el submit)
     }
     //metodo para obtener datos del usuario desde mysql
     private fun obtenerDatosUsuario(email: String) {
