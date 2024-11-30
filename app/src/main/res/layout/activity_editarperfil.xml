@@ -16,6 +16,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
 
         <!-- Toolbar que contiene el logo -->
@@ -48,12 +51,11 @@
         android:id="@+id/scrollView"
         android:layout_width="411dp"
         android:layout_height="733dp"
-        android:layout_marginTop="75dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/appBar"
-        tools:ignore="MissingConstraints,NotSibling,UnknownIdInLayout">
+        tools:ignore="MissingConstraints,NotSibling,UnknownIdInLayout"
+        tools:layout_editor_absoluteY="75dp">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,17 +68,44 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/materialToolbar2"
-                android:layout_width="414dp"
-                android:layout_height="732dp"
+                android:layout_width="411dp"
+                android:layout_height="734dp"
                 android:background="#3FBD82"
                 android:minHeight="?attr/actionBarSize"
                 android:theme="?attr/actionBarTheme"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.666"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />
+=======
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/bt_aplicar"
+                android:layout_width="248dp"
+                android:layout_height="154dp"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:focusable="true"
+                android:foregroundTint="#00DE0909"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.496"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.972"
+                app:lottie_autoPlay="false"
+                app:lottie_rawRes="@raw/nuevosubmit"
+                app:lottie_speed="3"
+                app:tint="#00FFFFFF"
+                tools:ignore="SpeakableTextPresentCheck" />
+>>>>>>> 9e57c53 (se cambio de layout el submit)
 
             <TextView
                 android:id="@+id/matriculatxt"
@@ -87,10 +116,17 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.098"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/materialToolbar2"
                 app:layout_constraintVertical_bias="0.158" />
+=======
+                app:layout_constraintHorizontal_bias="0.123"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/materialToolbar2"
+                app:layout_constraintVertical_bias="0.169" />
+>>>>>>> 9e57c53 (se cambio de layout el submit)
 
             <TextView
                 android:id="@+id/textView3"
@@ -101,10 +137,17 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.119"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.568" />
+=======
+                app:layout_constraintHorizontal_bias="0.141"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.534" />
+>>>>>>> 9e57c53 (se cambio de layout el submit)
 
             <TextView
                 android:id="@+id/textView4"
@@ -115,10 +158,17 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.087"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.297" />
+=======
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.28" />
+>>>>>>> 9e57c53 (se cambio de layout el submit)
 
             <TextView
                 android:id="@+id/correotext"
@@ -132,10 +182,17 @@
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.413"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.359"
+=======
+                app:layout_constraintHorizontal_bias="0.486"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.329"
+>>>>>>> 9e57c53 (se cambio de layout el submit)
                 tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits" />
 
             <TextView
@@ -150,16 +207,28 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.463"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.643"
+=======
+                app:layout_constraintHorizontal_bias="0.522"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.612"
+>>>>>>> 9e57c53 (se cambio de layout el submit)
                 tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits" />
 
             <TextView
                 android:id="@+id/matriculatext"
                 android:layout_width="339dp"
                 android:layout_height="47dp"
+<<<<<<< HEAD
+=======
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="536dp"
+>>>>>>> 9e57c53 (se cambio de layout el submit)
                 android:editable="false"
                 android:ems="10"
                 android:inputType="text"
@@ -167,25 +236,32 @@
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+<<<<<<< HEAD
                 app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
                 app:layout_constraintHorizontal_bias="0.388"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/materialToolbar2"
                 app:layout_constraintVertical_bias="0.227"
+=======
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.486"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toBottomOf="@+id/matriculatxt"
+>>>>>>> 9e57c53 (se cambio de layout el submit)
                 tools:ignore="Autofill,Deprecated,HardcodedText,LabelFor,TextViewEdits,TouchTargetSizeCheck" />
 
             <Button
-                android:id="@+id/bt_aplicar"
+                android:id="@+id/bt_aplica"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aplicar
 "
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.483"
+                app:layout_constraintHorizontal_bias="0.949"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.963"
+                app:layout_constraintVertical_bias="0.96"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -197,10 +273,17 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.089"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.434" />
+=======
+                app:layout_constraintHorizontal_bias="0.105"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.411" />
+>>>>>>> 9e57c53 (se cambio de layout el submit)
 
             <TextView
                 android:id="@+id/textuser"
@@ -226,6 +309,7 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.112"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -244,6 +328,12 @@
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.824" />
+=======
+                app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.681" />
+>>>>>>> 9e57c53 (se cambio de layout el submit)
 
             <EditText
                 android:id="@+id/textname"
@@ -255,10 +345,17 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.413"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.075" />
+=======
+                app:layout_constraintHorizontal_bias="0.486"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.08" />
+>>>>>>> 9e57c53 (se cambio de layout el submit)
 
             <EditText
                 android:id="@+id/biografiatext"
@@ -270,9 +367,16 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.436"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
+=======
+                app:layout_constraintHorizontal_bias="0.507"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.468"
+>>>>>>> 9e57c53 (se cambio de layout el submit)
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
@@ -284,6 +388,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
                 app:layout_constraintEnd_toEndOf="parent"
+<<<<<<< HEAD
                 app:layout_constraintHorizontal_bias="0.402"
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -304,6 +409,12 @@
                 app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.893"
+=======
+                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.743"
+>>>>>>> 9e57c53 (se cambio de layout el submit)
                 tools:ignore="SpeakableTextPresentCheck" />
 
 
@@ -313,44 +424,48 @@
     </ScrollView>
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/materialToolbar"
-        android:layout_width="409dp"
-        android:layout_height="95dp"
-        android:layout_marginBottom="4dp"
+        android:id="@+id/barra_abajo"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
         android:background="#010201"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView"
-        app:layout_constraintVertical_bias="0.0"
-        tools:ignore="VisualLintBounds">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Contenedor horizontal para centrar los botones -->
+        <!-- Contenedor para centrar los botones -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="8dp">
+            android:orientation="horizontal">
 
             <!-- Primer botón (boton_inicio) -->
             <ImageButton
                 android:id="@+id/boton_inicio"
-                android:layout_width="90dp"
-                android:layout_height="77dp"
+                android:layout_width="78sp"
+                android:layout_height="77sp"
                 android:backgroundTint="#00FFFFFF"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/home"
                 app:tint="@color/white"
                 tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
+            <!-- Tercer botón (boton_agregar) -->
+            <ImageButton
+                android:id="@+id/boton_agregar"
+                android:layout_width="77dp"
+                android:layout_height="80dp"
+                android:background="#00FFFFFF"
+                app:srcCompat="@drawable/plus"
+                app:tint="@color/black_opacity"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
+
             <!-- Cuarto botón (boton_user) -->
             <ImageButton
                 android:id="@+id/boton_user"
-                android:layout_width="90dp"
+                android:layout_width="77dp"
                 android:layout_height="80dp"
                 android:backgroundTint="#020202"
                 android:scaleType="centerCrop"
@@ -358,20 +473,10 @@
                 app:tint="#FBF8F8"
                 tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
-            <!-- Quinto botón (logOutBt) -->
-            <ImageButton
-                android:id="@+id/logOutBt"
-                android:layout_width="90dp"
-                android:layout_height="77dp"
-                android:backgroundTint="#020202"
-                android:keepScreenOn="true"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/logout"
-                app:tint="#FBF8F8"
-                tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
         </LinearLayout>
 
     </com.google.android.material.appbar.MaterialToolbar>
+
 
 
 
