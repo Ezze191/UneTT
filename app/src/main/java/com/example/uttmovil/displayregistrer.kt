@@ -18,6 +18,8 @@ import com.google.firebase.auth.UserProfileChangeRequest
 * L - LOGIN
 * R - REGISTER */
 
+//comentar
+
 
 class displayregistrer : AppCompatActivity() {
     //obtener objeto de firebase para la autotentificacion
