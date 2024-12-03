@@ -28,6 +28,7 @@ import retrofit2.Response
 
 class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
+    //encuentra todos los id de los botones de la publiacion
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.name)
         val usernameTextView: TextView = itemView.findViewById(R.id.username)
@@ -43,11 +44,13 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
+        //emcuentra el viewholder de como se va ver la publicacion ya una vez llenada
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
         return PostViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
+        //reasigna los atributos de la publicacion por los consultados
         val post = posts[position]
         holder.nameTextView.text = post.name
         holder.usernameTextView.text = post.username
@@ -99,7 +102,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
                 post.likedBy.remove(userID)
                 post.likes--
                 holder.likesCountTextView.text = post.likes.toString()
-                //elimar like de la base de datos de mysql
+
 
 
             }else{
@@ -181,6 +184,7 @@ class PostAdapter(private val posts: List<Post>) : RecyclerView.Adapter<PostAdap
             val commentText = holder.commentEditText.text.toString()
 
             if(commentText.isNotEmpty()){
+                //crea un objeto para mandar los datos del comentario a firebase
                 val comment = hashMapOf(
                     "username" to FirebaseAuth.getInstance().currentUser?.email,
                     "comment" to commentText,

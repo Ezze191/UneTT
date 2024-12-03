@@ -29,15 +29,26 @@ import com.airbnb.lottie.LottieAnimationView
 
 class displayfeed : AppCompatActivity() {
 
+    //busca los atributos para ver las publicaciones
     private lateinit var postList: MutableList<Post>
+    //postlist es una lista donde se almacenana las publicaciones
     private lateinit var postAdapter: PostAdapter
-    private lateinit var recyclerView: RecyclerView
+    /*el postAdapter es el que guarda todo el codigo de las publicaciones como los botones
+    *                                  de comentar y darle like */
 
+    private lateinit var recyclerView: RecyclerView
+    //es el espacio donde publica
+
+    //atributos de firebase para la autotentificacion y la base de datos y el almacenamiento en la nube
     @SuppressLint("MissingInflatedId")
+    //auth es la autotentificacion
     val auth = FirebaseAuth.getInstance()
+    //db es la base de datos donde guarda las publicaciones
     val db = FirebaseFirestore.getInstance()
+    // storage es donde guarda las imagenes en la nube
     val storage = FirebaseStorage.getInstance()
 
+    //es pra ver si se ha seleccionado una foto con publicacion
     var selectedFileUri: Uri? = null
 
 
@@ -66,7 +77,7 @@ class displayfeed : AppCompatActivity() {
                     Toast.makeText(this, "Error al cargar publicaciones", Toast.LENGTH_SHORT).show()
                     return@addSnapshotListener
                 }
-
+                //limpia los posts actuales
                 postList.clear()
                 snapshot?.documents?.forEach { document ->
                     val post = document.toObject(Post::class.java)?.copy(postId = document.id)
@@ -93,7 +104,7 @@ class displayfeed : AppCompatActivity() {
 
                                 // Limpiar los comentarios actuales
                                 post.comments =
-                                    mutableListOf() // Asegúrate de que la lista sea mutable
+                                    mutableListOf() // es una lista manipulable
 
                                 // Agregar comentarios nuevos
                                 commentSnapshot?.documents?.forEach { commentDocument ->

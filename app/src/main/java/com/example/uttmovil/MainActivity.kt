@@ -19,9 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 
-/* INDICE
-* L - LOGIN
-* R - REGISTER */
+
 
 
 
@@ -65,7 +63,8 @@ class MainActivity : AppCompatActivity() {
             val email = inputgmail.text.toString()
             val password = inputpass.text.toString()
 
-            //L1.verificar si existe en la base de datos de mysql basandose en el email y password
+            //es una funcion que
+            //verificar si existe en la base de datos de mysql basandose en el email y password
             //que el usuario ha proporcionado en los inputs inputgmail y inputpass
             loginUsuario(email, password)
 
@@ -96,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                     // Verificamos si el login fue exitoso
                     if (cleanedResponse ==  responseBody.replace("conexionexitosa", "").trim()) {
                         // Si el login es exitoso
-                        //l3.Verificar si el mismo usuario proporcionado existe en firebase
+                        //Verificar si el mismo usuario proporcionado existe en firebase
                         LoginFireBase(email, password)
 
                     } else {
@@ -127,7 +126,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-    //L4. esta funcion nos permite checar si el usuario proporcionado existe en firebase
+    // esta funcion nos permite checar si el usuario proporcionado existe en firebase
     private fun LoginFireBase(email: String, password: String){
         //aqui le estamos diciendo que tiene que iniciar seccion con el email y password
         auth.signInWithEmailAndPassword(email, password)
@@ -137,7 +136,7 @@ class MainActivity : AppCompatActivity() {
                 val user = FirebaseAuth.getInstance().currentUser
 
                 if(user?.isEmailVerified == true) {
-                    //L5.si el correo esta verificado lo dirije a la pantalla del feed
+                    //si el correo esta verificado lo dirije a la pantalla del feed
                     /*val intent = Intent(this, displayfeed::class.java)
                     startActivity(intent) */
 

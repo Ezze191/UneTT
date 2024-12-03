@@ -14,9 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-/* INDICE
-* L - LOGIN
-* R - REGISTER */
+
 
 
 class displayregistrer : AppCompatActivity() {
@@ -42,20 +40,21 @@ class displayregistrer : AppCompatActivity() {
         //buscar boton de registrar
         val bregistrar = findViewById<Button>(R.id.btregister)
 
-        //R1.Cuando el usuario de click al voton de registrar se inicia este evento
+        //Cuando el usuario de click al voton de registrar se inicia este evento
         bregistrar.setOnClickListener{
-            //R2.Guarda los datos proporcionados por el usuario a las variables correspondientes
+            //Guarda los datos proporcionados por el usuario a las variables correspondientes
             val email = inputemail.text.toString()
             val password = inputpassword.text.toString()
             val username = inputusername.text.toString()
 
-            /*R3.Esta funcion permite verificar si el correo proporcionado es institucional
-            * osea que termina en @uttcampus.edu.mx */
+            /*Esta funcion permite verificar si el correo proporcionado es institucional
+            osea que termina en @uttcampus.edu.mx */
+
             val keywords = listOf("@uttcampus.edu.mx")
             val escorrecto = keywords.all{email.contains(it)}
-            /*R4.Y si es correcto se procede a registrar al usuario en firebase */
+            /*Y si es correcto se procede a registrar al usuario en firebase */
             if(escorrecto){
-                //R5.Funcion que pasa los datos email,password y username a la funcion registrar de firebase
+                //Funcion que pasa los datos email,password y username a la funcion registrar de firebase
                 registrar(email, password, username)
 
                 }else{
@@ -68,12 +67,12 @@ class displayregistrer : AppCompatActivity() {
             }
         }
     }
-    //R6.funcion que registra al usuario con los datos que ingreso a firebase
+    //funcion que registra al usuario con los datos que ingreso a firebase
     private fun registrar(correo:String, password:String, username:String) {
-        //R7.aqui crea el nuevo usuario con las credenciales proporcionadas
+        //aqui crea el nuevo usuario con las credenciales proporcionadas
         auth.createUserWithEmailAndPassword(correo, password)
             .addOnCompleteListener { authResult ->
-                //R8.si la accion se ejecuta correctamente lo va a subir a firebase y actualizar el nombre
+                //si la accion se ejecuta correctamente lo va a subir a firebase y actualizar el nombre
                 val user = auth.currentUser
                 val profileUpdates = UserProfileChangeRequest.Builder()
                     .setDisplayName(username)
@@ -82,12 +81,12 @@ class displayregistrer : AppCompatActivity() {
                 user?.updateProfile(profileUpdates)
                     ?.addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            // R9.Enviar el correo de verificación
+                            // Enviar el correo de verificación
                             user.sendEmailVerification()
                                 .addOnCompleteListener { emailTask ->
-                                    //R10.si el correo se envio correctamente va hacer esto
+                                    //si el correo se envio correctamente va hacer esto
                                     if (emailTask.isSuccessful) {
-                                            //R11.si es correcto se va a enviar a una pantalla de verificacion de correo
+                                            //si es correcto se va a enviar a una pantalla de verificacion de correo
                                         AlertDialog.Builder(this@displayregistrer).apply {
                                             setTitle("Registro exitoso")
                                             setMessage("Verifica tu correo para iniciar sesion")
@@ -96,7 +95,7 @@ class displayregistrer : AppCompatActivity() {
 
                                         }.show()
 
-                                        //R11.y si es correcto lo va a registrar a la base de datos de muysql
+                                        //y si es correcto lo va a registrar a la base de datos de muysql
                                         RetrofitClient.apiService.insertUser(correo, username, password)
                                             .enqueue(object : Callback<Void> {
                                                 override fun onResponse(
@@ -104,7 +103,7 @@ class displayregistrer : AppCompatActivity() {
                                                     response: Response<Void>
                                                 ) {
                                                     if (response.isSuccessful) {
-                                                        //R12.Si se registro correctamente en mysql va a mostrar un mensaje
+                                                        //Si se registro correctamente en mysql va a mostrar un mensaje
 
 
                                                     } else {

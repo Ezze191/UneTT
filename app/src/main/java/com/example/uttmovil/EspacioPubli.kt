@@ -26,12 +26,19 @@ import retrofit2.Response
 
 class EspacioPubli : AppCompatActivity() {
 
+    //atributos para de firebase
+
+    //auth es para la autotentifiacion
     val auth = FirebaseAuth.getInstance()
+    /*es la base de datos para guardar los post*/
     val db = FirebaseFirestore.getInstance()
+    /*guarda las imagenes si hay en la publicacion  */
     val storage = FirebaseStorage.getInstance()
 
+    //es para guardar el nombre del archivo seleccionado para subir al post
     var selectedFileUri: Uri? = null
 
+    //donde va guardar el nombre de la consulta de la base de datos
     var name = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,26 +86,31 @@ class EspacioPubli : AppCompatActivity() {
             finish()
         }
 
+        //encontrar los botones del espacio de comentar
         val postContent = findViewById<EditText>(R.id.comenttext)
         val mediaUpload = findViewById<Button>(R.id.mediaUpload)
         val submitButton = findViewById<Button>(R.id.btcomentar)
         val deleteFileButton = findViewById<Button>(R.id.deleteFileButton)
         val fileNameTextView = findViewById<TextView>(R.id.fileNameTextView)
 
+        //guarda el email actualmente en firebse
         val email = auth.currentUser?.email
         obtenerDatosUsuario(email.toString())
 
+        //es el boton que elimina el archivo seleccionado para publicar como una foto
         deleteFileButton.setOnClickListener {
             selectedFileUri = null
             fileNameTextView.text = "No file selected"
             Toast.makeText(this, "Archivo eliminado. Puedes seleccionar otro.", Toast.LENGTH_SHORT).show()
         }
 
+        /*es una funcion que permite abrir la galeria para seleccionar una foto */
         mediaUpload.setOnClickListener {
             openFilePicker()  // Abre el selector de archivos para elegir una imagen
         }
-
+        //boton sumbit de publicar
         submitButton.setOnClickListener {
+            //guarda el usuario que esta logeado actualmente
             val user = auth.currentUser
             if (user == null) {
                 Toast.makeText(this, "Debes iniciar sesión", Toast.LENGTH_SHORT).show()
@@ -108,6 +120,7 @@ class EspacioPubli : AppCompatActivity() {
             val content = postContent.text.toString()
             var mediaUrl: String? = null
 
+            //para ver cual archivo se acaba de arrastrar de la galeria hacia la publicacion
             if (selectedFileUri != null) {
                 val storageRef = storage.reference.child("posts/${user.uid}/${selectedFileUri?.lastPathSegment}")
                 val uploadTask = storageRef.putFile(selectedFileUri!!)  // Usa la URI directamente aquí
@@ -125,6 +138,7 @@ class EspacioPubli : AppCompatActivity() {
         }
     }
 
+    //funcion para obtener los datos consultados de sql con retrofit
     private fun obtenerDatosUsuario(email: String) {
         val call = RetrofitClient.apiService.searchUser(email)
         call.enqueue(object : retrofit2.Callback<String> {
@@ -132,10 +146,12 @@ class EspacioPubli : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()?.split("\n") ?: listOf()
                     if (responseBody.size >= 3) {
+                        //guarda los atributos consultados
                         var userName = responseBody[0]
                         val biografia = responseBody[1]
                         val fecha = responseBody[2]
 
+                        //reasigna la variable del name y guarda el nombre de usuario
                         name = userName
                     }
                 }
@@ -147,8 +163,11 @@ class EspacioPubli : AppCompatActivity() {
         })
     }
 
+    //funcion para guardar el post en firebase
     private fun savePost(content: String, mediaUrl: String?) {
+        //genera un postid para cada publicacion
         val postId = db.collection("post").document().id // Genera un ID único
+        //guarda los atributos para comentar en un objeto para enviarlos a firebase
         val post = hashMapOf(
             "name" to name,
             "username" to auth.currentUser?.email,
@@ -159,7 +178,7 @@ class EspacioPubli : AppCompatActivity() {
             "mediaURL" to mediaUrl,
             "userId" to auth.currentUser?.uid
         )
-
+        //indica que lo va a guardar en la coleccion post de firebase
         db.collection("post").add(post)
             .addOnSuccessListener {
                 //se sube a la base de datos de mysql
@@ -170,6 +189,7 @@ class EspacioPubli : AppCompatActivity() {
             }
     }
 
+    //funcion para detectar el archivo seleccionado de la galeria
     private val pickFileLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         val fileNameTextView = findViewById<TextView>(R.id.fileNameTextView)
         if (uri != null) {
@@ -195,6 +215,7 @@ class EspacioPubli : AppCompatActivity() {
         pickFileLauncher.launch("image/*")  // Limita la selección solo a imágenes
     }
 
+    //funcion donde sube la publicacion a la base de datos de sql
     fun uploadpost(username: String, post: String, mediaURL: String, date: String, postId: String) {
         // Llamada a Retrofit para enviar la publicación
         val postRequest = PostRequest(

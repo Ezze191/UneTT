@@ -2,6 +2,7 @@ import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
+//crea una data class que guarda los atributos del post para enviarlos a la base de datos
 data class Post(
     val name: String? = null,
     val username: String? = null,
@@ -16,6 +17,7 @@ data class Post(
 
 )
 
+//crea una data class que guarda los atributos de los comentarios para guardarlos en la base de datos
 data class Comment(
     val username: String? = null,
     val comment: String? = null,

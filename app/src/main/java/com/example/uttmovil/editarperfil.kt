@@ -30,8 +30,12 @@ class editarperfil : AppCompatActivity() {
 
         //obtener los datos del usuario desde la base de datos para llenar los campos a editar
 
+        //atributos de firebase
+        /*auth es la autententifiacion*/
         val auth = FirebaseAuth.getInstance()
+        /*currentuser guarda el usuario actualmente registrado */
         val currentUser = auth.currentUser
+        /*guarda el email del usuario actual */
         val userEmail: String? = currentUser?.email
 
         //mando a llamar a la funcion para obtener los datos desde mysql
@@ -87,6 +91,7 @@ class editarperfil : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()?.split("\n") ?: listOf()
                     if (responseBody.size >= 3) {
+                        /*trae de la base de datos los atributos consultados */
                         var userName = responseBody[0]
                         val biografia = responseBody[1]
                         val fecha = responseBody[2]
@@ -202,7 +207,7 @@ class editarperfil : AppCompatActivity() {
 
                         }
 
-
+                    //mensajes de erroes
                     } else {
                         AlertDialog.Builder(this@editarperfil).apply {
                             setTitle("Retrofit Error")
@@ -231,13 +236,16 @@ class editarperfil : AppCompatActivity() {
         })
     }
 
+    //una funcion que manda los atributos necesarios para actualizar la password de firebase y retrofit
     fun actualizarPassword(
         nuevaPassword: String,
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
+        //una instancio que guarda el usuario actualemte de firebase
         val user = FirebaseAuth.getInstance().currentUser
 
+        //si el usuario no es nulo seguir con el procedimiento de actualizar
         if (user != null) {
             val userEmail = user.email
             if (userEmail != null) {
